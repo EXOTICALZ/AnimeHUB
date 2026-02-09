@@ -175,7 +175,7 @@ const animeDatabase = [
     ],
     sources: ["Ani-One", "Bstation"]
   },
-  {  {
+  {
     id: 11,
     title: "Shikimori's Not Just a Cutie",
     day: "Minggu",
