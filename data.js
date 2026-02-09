@@ -176,28 +176,28 @@ const animeDatabase = [
     sources: ["Ani-One", "Bstation"]
   },
   {
-    id: 11,
+    id: 21,
     title: "Shikimori's Not Just a Cutie",
     day: "Minggu",
     time: "01:00",
-    genre: ["Romance", "Comedy", "Slice of Life"],
+    genre: ["Romance", "Comedy"],
     img: "https://images.weserv.nl/?url=https://cdn.myanimelist.net/images/anime/1015/122397.jpg",
-    desc: "Izumi adalah cowok yang sangat tidak beruntung. Namun, dia memiliki pacar yang sempurna: Shikimori. Dia cantik, baik, tapi saat Izumi dalam masalah, dia berubah menjadi 'cool girl' yang keren!",
+    desc: "Izumi adalah cowok yang sangat tidak beruntung, tapi pacarnya, Shikimori, selalu siap melindunginya dengan aksi yang sangat keren!",
     studio: "Doga Kobo",
-    playlistId: "PL4XCsSaamNEg-YgTtJdjuL9W7O-Y2yBwJ", // Playlist Ani-One
+    playlistId: "PLxSscENEp7Ji_m7_v_q8jW8udQw4w9Wg", // ID Playlist Baru (Lebih Stabil)
     episodes: [
-      { n: 1, ytId: "m_mqEiALEkWz6iNi", title: "Pacarku yang Sangat Keren" },
-      { n: 2, ytId: "GjZhn8WxtGgMk2b7", title: "Pertandingan Olahraga" },
-      { n: 3, ytId: "x0vQIsf4mEw", title: "Setelah Badai Berlalu" },
-      { n: 4, ytId: "C1XfW3O4XqM", title: "Awal Musim Panas" },
-      { n: 5, ytId: "T7yG8_pX9M2", title: "Bermain di Sungai" },
-      { n: 6, ytId: "L8vK5_bB1nE", title: "Festival Kembang Api" },
-      { n: 7, ytId: "M9wL0_pP8Xo", title: "Festival Budaya I" },
-      { n: 8, ytId: "V5yL2_qX3M8", title: "Festival Budaya II" },
-      { n: 9, ytId: "K8wK0_m2Xo0", title: "Kepolosan dan Kedewasaan" },
-      { n: 10, ytId: "H7yM4_pX1M2", title: "Keinginan untuk Menang" },
-      { n: 11, ytId: "J9vN3_bB9nE", title: "Shikimori yang Manis" },
-      { n: 12, ytId: "G8wP9_m1Xo8", title: "Lebih dari Sekadar Cantik" }
+      { n: 1, ytId: "y6r2YfA8BTo", title: "Pacarku Sangat Keren" },
+      { n: 2, ytId: "rC-oM9x6_pI", title: "Pertandingan Olahraga" },
+      { n: 3, ytId: "z1f4Y_m7Xo0", title: "Setelah Badai Berlalu" },
+      { n: 4, ytId: "v9WkU9_m5Xo", title: "Awal Musim Panas" },
+      { n: 5, ytId: "XQxO_S-m9Xo", title: "Bermain di Sungai" },
+      { n: 6, ytId: "09yL8_qP2S4", title: "Festival Kembang Api" },
+      { n: 7, ytId: "Gv_0WkF9C6M", title: "Festival Budaya I" },
+      { n: 8, ytId: "vL6yN7-B7nE", title: "Festival Budaya II" },
+      { n: 9, ytId: "z8WkU9_m5Xo", title: "Kepolosan dan Kedewasaan" },
+      { n: 10, ytId: "X9wL0_pP8Xo", title: "Keinginan Menang" },
+      { n: 11, ytId: "R7yL2_qX3M8", title: "Shikimori yang Manis" },
+      { n: 12, ytId: "T9vL5_bB1nE", title: "Lebih dari Sekadar Cantik" }
   ],
   sources: ["Ani-One Asia"]
   }
