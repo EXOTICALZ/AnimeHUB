@@ -1,183 +1,242 @@
-/**
- * ANIME DATABASE
- * Structure: Array of Objects
- * Last Updated: February 2026
- */
-
 const animeDatabase = [
   {
     id: 1,
-    title: "Jujutsu Kaisen Season 3",
+    title: "Jujutsu Kaisen S1",
     day: "Kamis",
     time: "23:00",
-    genre: ["Action", "Supernatural", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=600&fit=crop",
-    desc: "Petualangan Yuji Itadori berlanjut dalam menghadapi kutukan yang lebih kuat. Arc Culling Game mencapai klimaksnya dengan pertarungan epik melawan Sukuna.",
+    genre: ["Action", "Supernatural"],
+    img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+    desc: "Yuji Itadori menelan kutukan tingkat tinggi untuk menyelamatkan temannya, menyeretnya ke dunia penyihir Jujutsu yang berbahaya.",
     studio: "MAPPA",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Beginning of the End" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Sukuna's Domain" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Gojo's Return" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "The Final Battle Begins" }
-    ],
-    sources: ["Muse Indonesia", "Ani-One"]
+    playlistId: "PLxSscENEp7JhH6mI6N_M_fH_Y9T5aDAn7",
+    sources: ["Ani-One Asia"]
   },
   {
     id: 2,
-    title: "Demon Slayer: Infinity Castle Arc",
-    day: "Minggu",
-    time: "22:30",
-    genre: ["Action", "Historical", "Supernatural"],
-    img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&h=600&fit=crop",
-    desc: "Tanjiro dan para Hashira menyerbu kastil Muzan Kibutsuji dalam pertempuran terakhir melawan raja iblis. Arc final yang penuh emosi dan action spektakuler.",
-    studio: "ufotable",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "Infinity Castle Invasion" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Upper Moon's Last Stand" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Hashira vs Muzan" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Dawn of Victory" }
-    ],
-    sources: ["Muse Indonesia", "Bstation"]
+    title: "Spy x Family",
+    day: "Sabtu",
+    time: "22:00",
+    genre: ["Action", "Comedy"],
+    img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
+    desc: "Seorang mata-mata membangun keluarga palsu untuk misi rahasia, tanpa menyadari istrinya adalah pembunuh bayaran dan anaknya bisa membaca pikiran.",
+    studio: "Wit Studio",
+    playlistId: "PLkSscENEp7JjW8uA_qFjM0Y_S-m9XoR_x",
+    sources: ["Muse Indonesia"]
   },
   {
     id: 3,
-    title: "One Piece: Elbaf Saga",
-    day: "Sabtu",
-    time: "21:00",
-    genre: ["Adventure", "Fantasy", "Comedy"],
-    img: "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=400&h=600&fit=crop",
-    desc: "Luffy dan kru Topi Jerami tiba di pulau raksasa Elbaf. Misteri tentang Man Marked by Flames dan Road Poneglyph terakhir mulai terungkap.",
-    studio: "Toei Animation",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "Welcome to Elbaf" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "The Giant's Pride" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Road to Laugh Tale" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Shanks Appears!" },
-      { n: 5, ytId: "dQw4w9WgXcQ", title: "The Final Road Poneglyph" }
-    ],
-    sources: ["Ani-One", "Bstation"]
+    title: "Chainsaw Man",
+    day: "Rabu",
+    time: "00:00",
+    genre: ["Action", "Gore"],
+    img: "https://cdn.myanimelist.net/images/anime/1908/135431.jpg",
+    desc: "Denji, pemuda miskin yang bergabung dengan iblis gergaji peliharannya, Pochita, untuk menjadi pemburu iblis demi melunasi hutang.",
+    studio: "MAPPA",
+    playlistId: "PLxSscENEp7Jh9T368_R5L7oP9_8v9rX_z",
+    sources: ["Ani-One Asia"]
   },
   {
     id: 4,
-    title: "My Hero Academia Season 8",
-    day: "Jumat",
+    title: "Mushoku Tensei S1",
+    day: "Minggu",
     time: "22:00",
-    genre: ["Action", "Superhero", "Shounen"],
-    img: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400&h=600&fit=crop",
-    desc: "Arc terakhir My Hero Academia! Deku menghadapi Shigaraki dalam pertempuran final yang menentukan masa depan para hero dan villain.",
-    studio: "Bones",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Final War Begins" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Deku vs Shigaraki: Round 1" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Heroes United" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Plus Ultra!" }
-    ],
-    sources: ["Muse Indonesia", "Ani-One"]
+    genre: ["Isekai", "Fantasy"],
+    img: "https://cdn.myanimelist.net/images/anime/1530/112615.jpg",
+    desc: "Seorang pengangguran bereinkarnasi ke dunia sihir sebagai Rudeus Greyrat, bertekad untuk menjalani hidup barunya tanpa penyesalan.",
+    studio: "Studio Bind",
+    playlistId: "PLkSscENEp7JjS9uA_qFjM8Y9T368_R5L7",
+    sources: ["Muse Indonesia"]
   },
   {
     id: 5,
-    title: "Chainsaw Man Season 2",
-    day: "Selasa",
-    time: "23:30",
-    genre: ["Action", "Horror", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1618944847828-82e943c3bdb7?w=400&h=600&fit=crop",
-    desc: "Denji menghadapi Reze, si Bomb Devil, dalam arc yang penuh aksi dan emosi. Hubungan kompleks antara devil hunters terungkap lebih dalam.",
-    studio: "MAPPA",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Bomb Girl" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Reze's Past" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Typhoon Devil" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Goodbye, Reze" }
-    ],
-    sources: ["Muse Indonesia", "Bstation"]
+    title: "Oshi no Ko",
+    day: "Rabu",
+    time: "22:00",
+    genre: ["Drama", "Supernatural"],
+    img: "https://cdn.myanimelist.net/images/anime/1812/134736.jpg",
+    desc: "Sisi gelap dunia hiburan terungkap saat seorang dokter bereinkarnasi menjadi anak dari idol favoritnya.",
+    studio: "Doga Kobo",
+    playlistId: "PLxSscENEp7JidvW8uA_qFjM8Y9T368_R5",
+    sources: ["Ani-One Asia"]
   },
   {
     id: 6,
-    title: "Attack on Titan: The Final Chapters",
-    day: "Rabu",
-    time: "23:00",
-    genre: ["Action", "Drama", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?w=400&h=600&fit=crop",
-    desc: "Epilog terakhir dari cerita Eren Yeager. Nasib Paradis dan dunia luar akhirnya terkuak dalam episode spesial yang mengharukan.",
-    studio: "MAPPA",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Battle of Heaven and Earth" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Paths Convergence" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "To You, 2000 Years From Now" }
-    ],
-    sources: ["Muse Indonesia", "Ani-One"]
+    title: "Frieren: Beyond Journey's End",
+    day: "Jumat",
+    time: "22:00",
+    genre: ["Adventure", "Fantasy"],
+    img: "https://cdn.myanimelist.net/images/anime/1015/138025.jpg",
+    desc: "Penyihir elf Frieren mengeksplorasi arti waktu dan hubungan manusia setelah mengalahkan raja iblis bersama teman-temannya.",
+    studio: "Madhouse",
+    playlistId: "PLkSscENEp7JiN_M_fH_Y9T5aDAn7_R5L7",
+    sources: ["Muse Indonesia"]
   },
   {
     id: 7,
-    title: "Bleach: Thousand-Year Blood War Part 4",
-    day: "Senin",
-    time: "22:00",
-    genre: ["Action", "Supernatural", "Shounen"],
-    img: "https://images.unsplash.com/photo-1611171711912-e458ba951f39?w=400&h=600&fit=crop",
-    desc: "Ichigo dan para Soul Reaper menghadapi Yhwach dalam pertempuran pamungkas. True Bankai Ichigo akhirnya terungkap!",
-    studio: "Pierrot",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Almighty" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Ichigo's True Bankai" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "The End of Quincy" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Epilogue: 10 Years Later" }
-    ],
-    sources: ["Ani-One", "Bstation"]
+    title: "Blue Lock",
+    day: "Minggu",
+    time: "00:00",
+    genre: ["Sports"],
+    img: "https://cdn.myanimelist.net/images/anime/1258/126920.jpg",
+    desc: "300 striker muda bersaing di fasilitas 'Blue Lock' untuk menjadi striker terbaik dunia bagi tim nasional Jepang.",
+    studio: "Eight Bit",
+    playlistId: "PLxSscENEp7JidA_qFjM8Y9T368_R5L7oP",
+    sources: ["Ani-One Asia"]
   },
   {
     id: 8,
-    title: "Spy x Family Season 3",
-    day: "Sabtu",
-    time: "20:00",
-    genre: ["Comedy", "Action", "Slice of Life"],
-    img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=600&fit=crop",
-    desc: "Misi keluarga Forger berlanjut! Anya menghadapi ujian Imperial Scholars sementara Loid dan Yor menangani misi rahasia yang saling berkaitan.",
-    studio: "Wit Studio & CloverWorks",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "Operation: Scholar" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Yor's Secret Mission" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Bond's Vision" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Family Vacation Arc" }
-    ],
-    sources: ["Muse Indonesia", "Ani-One"]
+    title: "Wind Breaker",
+    day: "Kamis",
+    time: "23:00",
+    genre: ["Action", "Delinquent"],
+    img: "https://cdn.myanimelist.net/images/anime/1057/141011.jpg",
+    desc: "Haruka Sakura datang ke sekolah yang penuh berandalan bukan untuk bertarung, tapi untuk melindungi kota.",
+    studio: "CloverWorks",
+    playlistId: "PLkSscENEp7Jh8ueA97G9X7A_qFjM8Y9T",
+    sources: ["Muse Indonesia"]
   },
   {
     id: 9,
-    title: "Frieren: Beyond Journey's End Season 2",
-    day: "Kamis",
-    time: "21:30",
-    genre: ["Fantasy", "Adventure", "Drama"],
-    img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&h=600&fit=crop",
-    desc: "Perjalanan Frieren berlanjut ke utara. Misteri tentang masa lalu Hero Himmel dan rahasia tentang elf immortality perlahan terungkap.",
-    studio: "Madhouse",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Northern Lands" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Himmel's Legacy" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "The Elf Who Understands Time" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Magic of the Ancient Era" }
-    ],
-    sources: ["Muse Indonesia", "Bstation"]
+    title: "Shangri-La Frontier",
+    day: "Minggu",
+    time: "16:00",
+    genre: ["Action", "Adventure"],
+    img: "https://cdn.myanimelist.net/images/anime/1373/138240.jpg",
+    desc: "Sunraku, pecinta game ampas, mencoba menaklukkan game VR terbaik di dunia dengan skill luar biasanya.",
+    studio: "C2C",
+    playlistId: "PLkSscENEp7JiN_M_fH_Y9T5aDAn7_vL6y",
+    sources: ["Muse Indonesia"]
   },
   {
     id: 10,
-    title: "Blue Lock Season 3",
+    title: "The Dangers in My Heart",
     day: "Minggu",
+    time: "01:00",
+    genre: ["Romance", "Comedy"],
+    img: "https://cdn.myanimelist.net/images/anime/1066/135541.jpg",
+    desc: "Kyotaro, penyendiri dengan fantasi gelap, jatuh cinta pada Anna Yamada, idol kelas yang ceria.",
+    studio: "Shin-Ei Animation",
+    playlistId: "PLxSscENEp7Jh8ueA97G9X7A_qFjM8Y9T",
+    sources: ["Ani-One Asia"]
+  },
+  {
+    id: 11,
+    title: "A Sign of Affection",
+    day: "Sabtu",
+    time: "21:30",
+    genre: ["Romance", "Drama"],
+    img: "https://cdn.myanimelist.net/images/anime/1025/139395.jpg",
+    desc: "Pertemuan antara mahasiswi tunarungu Yuki dan pengelana Itsuomi yang mengubah dunia mereka.",
+    studio: "Ajia-do",
+    playlistId: "PLkSscENEp7Jh8ueA97G9X7A_vL6yN7-B7",
+    sources: ["Muse Indonesia"]
+  },
+  {
+    id: 12,
+    title: "The Angel Next Door",
+    day: "Sabtu",
+    time: "22:00",
+    genre: ["Romance", "School"],
+    img: "https://cdn.myanimelist.net/images/anime/1865/133618.jpg",
+    desc: "Tetangga apartemen yang awalnya asing mulai saling peduli setelah sebuah payung di tengah hujan.",
+    studio: "project No.9",
+    playlistId: "PLxSscENEp7JiXQxO_S-m9Xo09yL8_qP2",
+    sources: ["Ani-One Asia"]
+  },
+  {
+    id: 13,
+    title: "Tonikaku Kawaii",
+    day: "Sabtu",
+    time: "00:05",
+    genre: ["Romance", "Marriage"],
+    img: "https://cdn.myanimelist.net/images/anime/1484/111003.jpg",
+    desc: "Nasa Yuzaki menikahi Tsukasa, gadis misterius yang menyelamatkannya dari kecelakaan.",
+    studio: "Seven Arcs",
+    playlistId: "PLkSscENEp7Jj8jW8uA_qFjMyv5-Z6Xv8",
+    sources: ["Muse Indonesia"]
+  },
+  {
+    id: 14,
+    title: "My Dress-Up Darling",
+    day: "Minggu",
+    time: "00:00",
+    genre: ["Romance", "Cosplay"],
+    img: "https://cdn.myanimelist.net/images/anime/1179/119045.jpg",
+    desc: "Kisah hobi cosplay yang menyatukan si populer Marin dan si penyendiri Gojo.",
+    studio: "CloverWorks",
+    playlistId: "PLxSscENEp7Ji_m7_v_q8jW8udQw4w9Wg",
+    sources: ["Bstation"]
+  },
+  {
+    id: 15,
+    title: "Insomniacs After School",
+    day: "Selasa",
+    time: "00:00",
+    genre: ["Romance", "Slice of Life"],
+    img: "https://cdn.myanimelist.net/images/anime/1881/134605.jpg",
+    desc: "Dua penderita insomnia menemukan ketenangan di observatorium sekolah.",
+    studio: "LIDENFILMS",
+    playlistId: "PLkSscENEp7JiH-8C0q_B7pQu_m_C3fB8",
+    sources: ["Muse Indonesia"]
+  },
+  {
+    id: 16,
+    title: "Golden Time",
+    day: "Jumat",
     time: "23:00",
-    genre: ["Sports", "Drama", "Psychological"],
-    img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=600&fit=crop",
-    desc: "U-20 World Cup dimulai! Isagi Yoichi memimpin tim Jepang dengan egoisme barunya melawan striker terbaik dunia dalam turnamen yang menentukan segalanya.",
-    studio: "8bit",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "World Stage" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Isagi's Evolution" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "The Egoist's Goal" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "World Class Striker" }
-    ],
-    sources: ["Ani-One", "Bstation"]
+    genre: ["Romance", "Drama"],
+    img: "https://cdn.myanimelist.net/images/anime/12/55515.jpg",
+    desc: "Kisah cinta mahasiswa hukum yang penuh intrik masa lalu dan amnesia.",
+    studio: "J.C.Staff",
+    playlistId: "PLkSscENEp7JjA2WvXpW265AGq_vD7K6O",
+    sources: ["Bstation"]
+  },
+  {
+    id: 17,
+    title: "Tomo-chan Is a Girl!",
+    day: "Kamis",
+    time: "00:30",
+    genre: ["Romance", "Comedy"],
+    img: "https://cdn.myanimelist.net/images/anime/1136/132431.jpg",
+    desc: "Gadis tomboi yang berusaha keras agar dianggap wanita oleh sahabatnya.",
+    studio: "Lay-duce",
+    playlistId: "PLxSscENEp7Ji6p_NqFj_N-IfH8vX9Y_M",
+    sources: ["Ani-One Asia"]
+  },
+  {
+    id: 18,
+    title: "Quintessential Quintuplets",
+    day: "Jumat",
+    time: "01:30",
+    genre: ["Romance", "Harem"],
+    img: "https://cdn.myanimelist.net/images/anime/1819/97947.jpg",
+    desc: "Futaro harus mengajar lima kembar yang semuanya benci belajar.",
+    studio: "Tezuka Productions",
+    playlistId: "PLkSscENEp7JiXQxO_S-m9Xo09yL8_qP3",
+    sources: ["Bstation"]
+  },
+  {
+    id: 19,
+    title: "Toradora!",
+    day: "Rabu",
+    time: "21:00",
+    genre: ["Romance", "Drama"],
+    img: "https://cdn.myanimelist.net/images/anime/13/22128.jpg",
+    desc: "Si Macan Taiga dan Naga Ryuji yang bersatu demi cinta.",
+    studio: "J.C.Staff",
+    playlistId: "PLkSscENEp7JiXQxO_S-m9Xo09yL8_qP4",
+    sources: ["Netflix"]
+  },
+  {
+    id: 20,
+    title: "Classroom of the Elite",
+    day: "Rabu",
+    time: "20:00",
+    genre: ["Drama", "Psychological"],
+    img: "https://cdn.myanimelist.net/images/anime/1162/141512.jpg",
+    desc: "Di sekolah elit, kecerdasan dan manipulasi adalah kunci untuk bertahan hidup.",
+    studio: "Lerche",
+    playlistId: "PLxSscENEp7Jh8ueA97G9X7A_qFjM8Y9T",
+    sources: ["Muse Indonesia"]
   }
 ];
-
-// Export untuk digunakan di file lain
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = animeDatabase;
-}
