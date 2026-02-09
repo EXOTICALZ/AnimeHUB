@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIMEHUB — Legal Streaming Aggregator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark-gray: #141414;
+      --mid-gray: #1f1f1f;
+      --accent-red: #ff0033;
+      --accent-red-hover: #cc0028;
+      --white: #ffffff;
+      --off-white: #e8e8e8;
+      --gray-text: #a0a0a0;
+      --gradient-overlay: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,0.9) 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(10,10,10,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,0,51,0.1);
+    }
+
+    .logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--accent-red) 0%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-red);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      height: 70vh;
+      background: linear-gradient(135deg, #1a0a0f 0%, #0a0a0a 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,0,51,0.15) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .hero h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      z-index: 1;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--gray-text);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      z-index: 1;
+    }
+
+    .search-bar {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 1.2rem 3rem 1.2rem 1.5rem;
+      background: rgba(31,31,31,0.8);
+      border: 2px solid transparent;
+      border-radius: 50px;
+      color: var(--white);
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: var(--accent-red);
+      background: rgba(31,31,31,0.95);
+    }
+
+    #searchInput::placeholder {
+      color: var(--gray-text);
+    }
+
+    /* FILTER SECTION */
+    .filters {
+      padding: 2rem 5%;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--dark-gray);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--mid-gray);
+      border: 2px solid transparent;
+      border-radius: 50px;
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: var(--accent-red);
+      color: var(--white);
+      border-color: var(--accent-red);
+    }
+
+    /* ANIME GRID */
+    .section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      padding: 3rem 5% 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .anime-grid {
+      padding: 0 5% 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anime-card {
+      background: var(--dark-gray);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border: 2px solid transparent;
+    }
+
+    .anime-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--accent-red);
+      box-shadow: 0 20px 60px rgba(255,0,51,0.3);
+    }
+
+    .anime-card-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .anime-card:hover .anime-card-img {
+      transform: scale(1.1);
+    }
+
+    .anime-card-content {
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .anime-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-red);
+      color: var(--white);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .anime-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .anime-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .anime-genres {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+
+    .genre-tag {
+      padding: 0.3rem 0.8rem;
+      background: rgba(255,0,51,0.15);
+      border: 1px solid rgba(255,0,51,0.3);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--accent-red);
+      font-weight: 500;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
+      backdrop-filter: blur(10px);
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: var(--dark-gray);
+      width: 95%;
+      max-width: 1400px;
+      max-height: 95vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255,0,51,0.2);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,0,51,0.2);
+      border: 2px solid var(--accent-red);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: var(--accent-red);
+      transform: rotate(90deg);
+    }
+
+    .player-wrapper {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+      background: var(--black);
+    }
+
+    .player-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .bstation-portal {
+      padding: 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,0,51,0.1) 0%, transparent 100%);
+    }
+
+    .bstation-portal h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .bstation-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 1rem 2.5rem;
+      background: var(--accent-red);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .bstation-link:hover {
+      background: var(--accent-red-hover);
+      transform: scale(1.05);
+    }
+
+    .modal-info {
+      padding: 2rem;
+    }
+
+    .modal-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .episode-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .episode-btn {
+      padding: 1rem;
+      background: var(--mid-gray);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      color: var(--off-white);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    .episode-btn:hover {
+      border-color: var(--accent-red);
+      transform: translateY(-3px);
+    }
+
+    .episode-btn.active {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark-gray);
+      padding: 3rem 5%;
+      text-align: center;
+      border-top: 1px solid rgba(255,0,51,0.1);
+      margin-top: 5rem;
+    }
+
+    footer p {
+      color: var(--gray-text);
+      margin-bottom: 1rem;
+    }
+
+    footer a {
+      color: var(--accent-red);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-red);
+      border-radius: 10px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 4%;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        height: 60vh;
+        margin-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .filters {
+        top: 70px;
+      }
+
+      .anime-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .modal-content {
+        width: 98%;
+        border-radius: 15px;
+      }
+
+      .modal-title {
+        font-size: 1.8rem;
+      }
+
+      .episode-nav {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .anime-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        flex-direction: column;
+      }
+
+      .filter-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="logo">ANIMEHUB</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#jadwal">Jadwal</a>
+      <a href="admin.html" target="_blank">Admin</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <h1>STREAMING LEGAL<br>SATU PLATFORM</h1>
+    <p>Akses 200+ anime dari Muse Indonesia, Ani-One, dan Bstation dalam satu tempat</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Cari anime favoritmu...">
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="filters" id="jadwal">
+    <button class="filter-btn active" data-filter="all">Semua</button>
+    <button class="filter-btn" data-filter="Senin">Senin</button>
+    <button class="filter-btn" data-filter="Selasa">Selasa</button>
+    <button class="filter-btn" data-filter="Rabu">Rabu</button>
+    <button class="filter-btn" data-filter="Kamis">Kamis</button>
+    <button class="filter-btn" data-filter="Jumat">Jumat</button>
+    <button class="filter-btn" data-filter="Sabtu">Sabtu</button>
+    <button class="filter-btn" data-filter="Minggu">Minggu</button>
+  </div>
+
+  <!-- ANIME GRID -->
+  <h2 class="section-title">📺 Sedang Tayang</h2>
+  <div class="anime-grid" id="animeGrid"></div>
+
+  <!-- MODAL -->
+  <div class="modal" id="animeModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalPlayer"></div>
+      <div class="modal-info">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="anime-meta">
+          <span id="modalDay"></span>
+          <span id="modalTime"></span>
+          <span id="modalStudio"></span>
+        </div>
+        <p id="modalDesc"></p>
+        <div class="anime-genres" id="modalGenres"></div>
+        
+        <h3 style="margin-top: 2rem; font-family: 'Archivo Black', sans-serif;">Episode List</h3>
+        <div class="episode-nav" id="episodeNav"></div>
+
+        <!-- DISQUS COMMENTS -->
+        <div id="disqus_thread" style="margin-top: 3rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>ANIMEHUB — Legal Anime Aggregator</p>
+    <p>Source: <a href="https://www.youtube.com/@MuseIndonesia" target="_blank">Muse Indonesia</a> • 
+       <a href="https://www.youtube.com/@AniOneAsia" target="_blank">Ani-One</a> • 
+       <a href="https://www.bilibili.tv" target="_blank">Bstation</a>
+    </p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">Made with ❤️ by AnimeFans • 2026</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="data.js"></script>
+  <script>
+    // GLOBAL VARIABLES
+    let currentFilter = 'all';
+    let currentAnime = null;
+    let currentEpisode = 1;
+
+    // GET CURRENT DAY
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const today = days[new Date().getDay()];
+
+    // NAVBAR SCROLL EFFECT
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // RENDER ANIME CARDS
+    function renderAnime(filter = 'all', searchQuery = '') {
+      const grid = document.getElementById('animeGrid');
+      grid.innerHTML = '';
+
+      let filteredData = animeDatabase;
+
+      // Filter by day
+      if (filter !== 'all') {
+        filteredData = filteredData.filter(anime => anime.day === filter);
+      }
+
+      // Filter by search
+      if (searchQuery) {
+        filteredData = filteredData.filter(anime => 
+          anime.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          anime.genre.some(g => g.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+      }
+
+      // Render cards
+      filteredData.forEach(anime => {
+        const card = document.createElement('div');
+        card.className = 'anime-card';
+        card.onclick = () => openModal(anime);
+
+        const isToday = anime.day === today;
+
+        card.innerHTML = `
+          ${isToday ? '<div class="anime-badge">UPDATE HARI INI</div>' : ''}
+          <img src="${anime.img}" alt="${anime.title}" class="anime-card-img">
+          <div class="anime-card-content">
+            <h3 class="anime-title">${anime.title}</h3>
+            <div class="anime-meta">
+              <span>📅 ${anime.day}</span>
+              <span>🕐 ${anime.time}</span>
+            </div>
+            <div class="anime-genres">
+              ${anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // Show no results
+      if (filteredData.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; padding: 3rem; color: var(--gray-text); grid-column: 1/-1;">Tidak ada anime ditemukan</p>';
+      }
+    }
+
+    // FILTER BUTTONS
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderAnime(currentFilter, document.getElementById('searchInput').value);
+      });
+    });
+
+    // SEARCH
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      renderAnime(currentFilter, e.target.value);
+    });
+
+    // OPEN MODAL
+    function openModal(anime) {
+      currentAnime = anime;
+      currentEpisode = 1;
+
+      document.getElementById('modalTitle').textContent = anime.title;
+      document.getElementById('modalDay').textContent = `📅 ${anime.day}`;
+      document.getElementById('modalTime').textContent = `🕐 ${anime.time}`;
+      document.getElementById('modalStudio').textContent = `🎬 ${anime.studio}`;
+      document.getElementById('modalDesc').textContent = anime.desc;
+      document.getElementById('modalGenres').innerHTML = anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('');
+
+      // Render episodes
+      const episodeNav = document.getElementById('episodeNav');
+      episodeNav.innerHTML = '';
+      anime.episodes.forEach((ep, index) => {
+        const btn = document.createElement('button');
+        btn.className = `episode-btn ${index === 0 ? 'active' : ''}`;
+        btn.textContent = `EP ${ep.n}`;
+        btn.onclick = () => loadEpisode(index);
+        episodeNav.appendChild(btn);
+      });
+
+      loadEpisode(0);
+
+      // Show modal
+      document.getElementById('animeModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Load Disqus
+      loadDisqus(anime.id);
+    }
+
+    // LOAD EPISODE
+    function loadEpisode(index) {
+      const episode = currentAnime.episodes[index];
+      const playerDiv = document.getElementById('modalPlayer');
+
+      // Check if Bstation source
+      if (currentAnime.sources.includes('Bstation') && !currentAnime.sources.includes('Muse Indonesia') && !currentAnime.sources.includes('Ani-One')) {
+        playerDiv.innerHTML = `
+          <div class="bstation-portal">
+            <h3>🎬 Episode ${episode.n}: ${episode.title}</h3>
+            <p style="color: var(--gray-text); margin-top: 1rem;">Anime ini hanya tersedia di Bstation</p>
+            <a href="https://www.bilibili.tv" target="_blank" class="bstation-link">
+              Tonton di Bstation →
+            </a>
+          </div>
+        `;
+      } else {
+        // YouTube embed
+        playerDiv.innerHTML = `
+          <div class="player-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/${episode.ytId}?autoplay=1" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        `;
+      }
+
+      // Update active episode button
+      document.querySelectorAll('.episode-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+    }
+
+    // CLOSE MODAL
+    function closeModal() {
+      document.getElementById('animeModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      document.getElementById('modalPlayer').innerHTML = '';
+    }
+
+    // DISQUS
+    function loadDisqus(animeId) {
+      const disqusThread = document.getElementById('disqus_thread');
+      disqusThread.innerHTML = '';
+
+      window.disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = `anime-${animeId}`;
+      };
+
+      const d = document, s = d.createElement('script');
+      s.src = 'https://animehub-legal.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+
+    // CLOSE MODAL ON ESCAPE
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // INITIAL RENDER
+    renderAnime();
+  </script>
+
+</body>
+</html>
