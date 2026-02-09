@@ -757,73 +757,62 @@
       // Load Disqus
       loadDisqus(anime.id);
     }
-
+    
     // LOAD EPISODE
     function loadEpisode(index) {
       const episode = currentAnime.episodes[index];
       const playerDiv = document.getElementById('modalPlayer');
+
+      // Update active button
+      document.querySelectorAll('.episode-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
 
       // Check if Bstation source
       if (currentAnime.sources.includes('Bstation') && !currentAnime.sources.includes('Muse Indonesia') && !currentAnime.sources.includes('Ani-One')) {
         playerDiv.innerHTML = `
           <div class="bstation-portal">
             <h3>🎬 Episode ${episode.n}: ${episode.title}</h3>
-            <p style="color: var(--gray-text); margin-top: 1rem;">Anime ini hanya tersedia di Bstation</p>
+            <p style="color: var(--gray-text); margin-top: 1rem;">Anime ini hanya tersedia secara legal di Bstation.</p>
             <a href="https://www.bilibili.tv" target="_blank" class="bstation-link">
               Tonton di Bstation →
             </a>
           </div>
         `;
       } else {
-        // YouTube embed
+        // Default YouTube Player (Muse/Ani-One)
         playerDiv.innerHTML = `
           <div class="player-wrapper">
             <iframe 
-              src="https://www.youtube.com/embed/${episode.ytId}?autoplay=1" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              src="https://www.youtube.com/embed/${episode.ytId}" 
               allowfullscreen>
             </iframe>
           </div>
         `;
       }
-
-      // Update active episode button
-      document.querySelectorAll('.episode-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-      });
     }
 
     // CLOSE MODAL
     function closeModal() {
       document.getElementById('animeModal').classList.remove('active');
-      document.body.style.overflow = 'auto';
       document.getElementById('modalPlayer').innerHTML = '';
+      document.body.style.overflow = 'auto';
     }
 
-    // DISQUS
+    // DISQUS (Optional - Biar tidak error kalau tidak dipakai)
     function loadDisqus(animeId) {
-      const disqusThread = document.getElementById('disqus_thread');
-      disqusThread.innerHTML = '';
-
-      window.disqus_config = function () {
-        this.page.url = window.location.href;
-        this.page.identifier = `anime-${animeId}`;
-      };
-
-      const d = document, s = d.createElement('script');
-      s.src = 'https://animehub-legal.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
+      console.log("Loading comments for anime:", animeId);
+      // Implementasi disqus bisa diletakkan di sini
     }
-
-    // CLOSE MODAL ON ESCAPE
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
 
     // INITIAL RENDER
-    renderAnime();
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof animeDatabase !== 'undefined') {
+        renderAnime('all');
+      } else {
+        console.error("File data.js tidak terbaca atau kosong!");
+      }
+    });
   </script>
-
 </body>
 </html>
