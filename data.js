@@ -181,23 +181,23 @@ const animeDatabase = [
   day: "Sabtu",
   time: "22:00",
   genre: ["Romance", "School"],
-  img: "https://cdn.myanimelist.net/images/anime/1865/133618.jpg",
+  img: "https://images.weserv.nl/?url=https://cdn.myanimelist.net/images/anime/1865/133618.jpg",
   desc: "Amane yang hidupnya berantakan mulai dirawat oleh tetangganya, Mahiru Shiina, gadis paling cantik di sekolah, setelah insiden payung di bawah hujan.",
   studio: "project No.9",
   playlistId: "PLxSscENEp7JiXQxO_S-m9Xo09yL8_qP20",
-  episodes: [
-    { n: 1, ytId: "XQxO_S-m9Xo", title: "Meeting the Angel" },
-    { n: 2, ytId: "09yL8_qP2S4", title: "Dinner with the Angel" },
-    { n: 3, ytId: "Gv_0WkF9C6M", title: "Reward for the Angel" },
-    { n: 4, ytId: "vL6yN7-B7nE", title: "The Angel at School" },
-    { n: 5, ytId: "z8WkU9_m5Xo", title: "Studying with the Angel" },
-    { n: 6, ytId: "X9wL0_pP8Xo", title: "The Angel's Gift" },
-    { n: 7, ytId: "R7yL2_qX3M8", title: "A Promise with the Angel" },
-    { n: 8, ytId: "T9vL5_bB1nE", title: "The Angel on a Day Off" },
-    { n: 9, ytId: "P8wK0_m2Xo0", title: "The Angel and the Spring" },
-    { n: 10, ytId: "Q7yM4_pX1M2", title: "The Angel in the Park" },
-    { n: 11, ytId: "S9vN3_bB9nE", title: "A Date with the Angel" },
-    { n: 12, ytId: "U8wP9_m1Xo8", title: "Farewell to the Angel" }
+    episodes: [
+    { n: 1, ytId: "XQxO_S-m9Xo", title: "Pertemuan dengan Malaikat" },
+    { n: 2, ytId: "09yL8_qP2S4", title: "Makan Malam Bersama Malaikat" },
+    { n: 3, ytId: "Gv_0WkF9C6M", title: "Hadiah untuk Malaikat" },
+    { n: 4, ytId: "vL6yN7-B7nE", title: "Malaikat di Sekolah" },
+    { n: 5, ytId: "z8WkU9_m5Xo", title: "Belajar Bersama Malaikat" },
+    { n: 6, ytId: "X9wL0_pP8Xo", title: "Hadiah dari Malaikat" },
+    { n: 7, ytId: "R7yL2_qX3M8", title: "Janji dengan Malaikat" },
+    { n: 8, ytId: "T9vL5_bB1nE", title: "Malaikat di Hari Libur" },
+    { n: 9, ytId: "P8wK0_m2Xo0", title: "Malaikat dan Musim Semi" },
+    { n: 10, ytId: "Q7yM4_pX1M2", title: "Malaikat di Taman" },
+    { n: 11, ytId: "S9vN3_bB9nE", title: "Kencan dengan Malaikat" },
+    { n: 12, ytId: "U8wP9_m1Xo8", title: "Selamat Tinggal Malaikat" }
   ],
   sources: ["Ani-One Asia"]
   }
