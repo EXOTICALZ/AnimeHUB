@@ -175,29 +175,29 @@ const animeDatabase = [
     ],
     sources: ["Ani-One", "Bstation"]
   },
-  {
-  id: 12,
-  title: "The Angel Next Door Spoils Me Rotten",
-  day: "Sabtu",
-  time: "22:00",
-  genre: ["Romance", "School"],
-  img: "https://images.weserv.nl/?url=https://cdn.myanimelist.net/images/anime/1865/133618.jpg",
-  desc: "Amane yang hidupnya berantakan mulai dirawat oleh tetangganya, Mahiru Shiina, gadis paling cantik di sekolah, setelah insiden payung di bawah hujan.",
-  studio: "project No.9",
-  playlistId: "PLxSscENEp7JiXQxO_S-m9Xo09yL8_qP20",
+  {  {
+    id: 11,
+    title: "Shikimori's Not Just a Cutie",
+    day: "Minggu",
+    time: "01:00",
+    genre: ["Romance", "Comedy", "Slice of Life"],
+    img: "https://images.weserv.nl/?url=https://cdn.myanimelist.net/images/anime/1015/122397.jpg",
+    desc: "Izumi adalah cowok yang sangat tidak beruntung. Namun, dia memiliki pacar yang sempurna: Shikimori. Dia cantik, baik, tapi saat Izumi dalam masalah, dia berubah menjadi 'cool girl' yang keren!",
+    studio: "Doga Kobo",
+    playlistId: "PL4XCsSaamNEg-YgTtJdjuL9W7O-Y2yBwJ", // Playlist Ani-One
     episodes: [
-    { n: 1, ytId: "XQxO_S-m9Xo", title: "Pertemuan dengan Malaikat" },
-    { n: 2, ytId: "09yL8_qP2S4", title: "Makan Malam Bersama Malaikat" },
-    { n: 3, ytId: "Gv_0WkF9C6M", title: "Hadiah untuk Malaikat" },
-    { n: 4, ytId: "vL6yN7-B7nE", title: "Malaikat di Sekolah" },
-    { n: 5, ytId: "z8WkU9_m5Xo", title: "Belajar Bersama Malaikat" },
-    { n: 6, ytId: "X9wL0_pP8Xo", title: "Hadiah dari Malaikat" },
-    { n: 7, ytId: "R7yL2_qX3M8", title: "Janji dengan Malaikat" },
-    { n: 8, ytId: "T9vL5_bB1nE", title: "Malaikat di Hari Libur" },
-    { n: 9, ytId: "P8wK0_m2Xo0", title: "Malaikat dan Musim Semi" },
-    { n: 10, ytId: "Q7yM4_pX1M2", title: "Malaikat di Taman" },
-    { n: 11, ytId: "S9vN3_bB9nE", title: "Kencan dengan Malaikat" },
-    { n: 12, ytId: "U8wP9_m1Xo8", title: "Selamat Tinggal Malaikat" }
+      { n: 1, ytId: "y6r2YfA8BTo", title: "Pacarku yang Sangat Keren" },
+      { n: 2, ytId: "rC-oM9x6_pI", title: "Pertandingan Olahraga" },
+      { n: 3, ytId: "x0vQIsf4mEw", title: "Setelah Badai Berlalu" },
+      { n: 4, ytId: "C1XfW3O4XqM", title: "Awal Musim Panas" },
+      { n: 5, ytId: "T7yG8_pX9M2", title: "Bermain di Sungai" },
+      { n: 6, ytId: "L8vK5_bB1nE", title: "Festival Kembang Api" },
+      { n: 7, ytId: "M9wL0_pP8Xo", title: "Festival Budaya I" },
+      { n: 8, ytId: "V5yL2_qX3M8", title: "Festival Budaya II" },
+      { n: 9, ytId: "K8wK0_m2Xo0", title: "Kepolosan dan Kedewasaan" },
+      { n: 10, ytId: "H7yM4_pX1M2", title: "Keinginan untuk Menang" },
+      { n: 11, ytId: "J9vN3_bB9nE", title: "Shikimori yang Manis" },
+      { n: 12, ytId: "G8wP9_m1Xo8", title: "Lebih dari Sekadar Cantik" }
   ],
   sources: ["Ani-One Asia"]
   }
