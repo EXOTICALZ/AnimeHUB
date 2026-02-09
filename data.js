@@ -138,61 +138,71 @@ const animeDatabase = [
     studio: "Nexus",
     episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Lost Echoes" }],
     sources: ["Bstation"]
-  },
+const animeDatabase = [
+  // --- ACTION & SHOUNEN (ID 1-10) ---
   {
-    id: 18,
-    title: "Wind Breaker",
+    id: 1,
+    title: "Jujutsu Kaisen Season 3",
     day: "Kamis",
     time: "23:00",
-    genre: ["Action", "School"],
-    img: "https://images.unsplash.com/photo-1524117074681-31bd4bb22ad3?w=400",
-    desc: "Haruka Sakura datang ke sekolah berandalan untuk menjadi yang terkuat.",
-    studio: "CloverWorks",
-    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Sakura's Fight" }],
+    genre: ["Action", "Supernatural"],
+    img: "https://cdn.myanimelist.net/images/anime/1792/138022.jpg",
+    desc: "Pertempuran epik di Culling Game dimulai.",
+    studio: "MAPPA",
+    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "The Culling Game" }, { n: 2, ytId: "dQw4w9WgXcQ", title: "Sakuna's Threat" }],
     sources: ["Muse Indonesia"]
   },
   {
-    id: 19,
-    title: "Kaiju No. 8",
+    id: 2,
+    title: "Demon Slayer: Infinity Castle",
+    day: "Minggu",
+    time: "22:30",
+    genre: ["Action", "Historical"],
+    img: "https://cdn.myanimelist.net/images/anime/1908/135431.jpg",
+    desc: "Penyerbuan ke markas pusat Muzan.",
+    studio: "ufotable",
+    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Into the Castle" }],
+    sources: ["Bstation"]
+  },
+  {
+    id: 3,
+    title: "One Piece",
     day: "Sabtu",
-    time: "22:00",
-    genre: ["Action", "Sci-Fi"],
-    img: "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=400",
-    desc: "Kafka Hibino berubah menjadi Kaiju dan berusaha masuk pasukan pertahanan.",
-    studio: "Production I.G",
-    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Transformation" }],
+    time: "21:00",
+    genre: ["Adventure", "Fantasy"],
+    img: "https://cdn.myanimelist.net/images/anime/1244/138851.jpg",
+    desc: "Perjalanan Luffy di Pulau Elbaf.",
+    studio: "Toei Animation",
+    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Giant's Island" }],
     sources: ["Ani-One"]
   },
-  {
-    id: 20,
-    title: "Blue Box",
-    day: "Kamis",
-    time: "23:56",
-    genre: ["Romance", "Sports"],
-    img: "https://images.unsplash.com/photo-1544919982-b61976f0ba43?w=400",
-    desc: "Kisah cinta dan ambisi olahraga antara pemain badminton dan basket.",
-    studio: "Telecom Animation Film",
-    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "Morning Practice" }],
-    sources: ["Muse Indonesia"]
-  },
+  { id: 4, title: "Chainsaw Man", day: "Rabu", time: "23:00", genre: ["Action", "Gore"], img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", desc: "Denji sang manusia gergaji.", studio: "MAPPA", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Dog & Chainsaw"}], sources: ["Ani-One"] },
+  { id: 5, title: "Solo Leveling", day: "Minggu", time: "00:00", genre: ["Action", "Fantasy"], img: "https://cdn.myanimelist.net/images/anime/1516/141014.jpg", desc: "Hunter terlemah menjadi dewa.", studio: "A-1 Pictures", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"I'm the Only One Leveling Up"}], sources: ["Ani-One"] },
+  { id: 6, title: "Black Clover", day: "Selasa", time: "18:00", genre: ["Magic", "Action"], img: "https://cdn.myanimelist.net/images/anime/2/88336.jpg", desc: "Asta tanpa sihir ingin jadi Raja Penyihir.", studio: "Pierrot", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Asta and Yuno"}], sources: ["Bstation"] },
+  { id: 7, title: "My Hero Academia", day: "Sabtu", time: "17:30", genre: ["Hero", "School"], img: "https://cdn.myanimelist.net/images/anime/1911/142363.jpg", desc: "Deku mewarisi kekuatan All Might.", studio: "Bones", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Izuku Midoriya: Origin"}], sources: ["Ani-One"] },
+  { id: 8, title: "Naruto Shippuden", day: "Senin", time: "19:00", genre: ["Ninja", "Action"], img: "https://cdn.myanimelist.net/images/anime/1565/111305.jpg", desc: "Naruto kembali setelah latihan 2 tahun.", studio: "Pierrot", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Homecoming"}], sources: ["Bstation"] },
+  { id: 9, title: "Hunter x Hunter", day: "Jumat", time: "20:00", genre: ["Adventure", "Action"], img: "https://cdn.myanimelist.net/images/anime/11/33657.jpg", desc: "Gon mencari ayahnya melalui ujian Hunter.", studio: "Madhouse", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Departure"}], sources: ["Bstation"] },
+  { id: 10, title: "Haikyuu!!", day: "Kamis", time: "19:00", genre: ["Sports", "Drama"], img: "https://cdn.myanimelist.net/images/anime/7/76014.jpg", desc: "Voli SMA Karasuno menuju Nasional.", studio: "Production I.G", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"End and Beginning"}], sources: ["Ani-One"] },
+
+  // --- OREGAIRU SERIES (ID 11-13) ---
+  { id: 11, title: "Oregairu Season 1", day: "Jumat", time: "00:00", genre: ["Romance", "Drama"], img: "https://cdn.myanimelist.net/images/anime/7/49631.jpg", desc: "Klub Relawan Hachiman.", studio: "Brain's Base", episodes: [{n:1, ytId:"A2WvXpW265A", title:"The Beginning"}], sources: ["Muse Indonesia"] },
+  { id: 12, title: "Oregairu Season 2", day: "Jumat", time: "00:30", genre: ["Romance", "Drama"], img: "https://cdn.myanimelist.net/images/anime/3/74407.jpg", desc: "Hubungan yang mulai retak.", studio: "feel.", episodes: [{n:1, ytId:"p5H97H7fV3w", title:"Changes"}], sources: ["Muse Indonesia"] },
+  { id: 13, title: "Oregairu Season 3", day: "Jumat", time: "01:00", genre: ["Romance", "Drama"], img: "https://cdn.myanimelist.net/images/anime/1530/108115.jpg", desc: "Kesimpulan masa SMA.", studio: "feel.", episodes: [{n:1, ytId:"Y_G97H7fV3w", title:"The End"}], sources: ["Muse Indonesia"] },
+
+  // --- POPULAR SELECTIONS (ID 14-50) ---
+  { id: 14, title: "Spy x Family", day: "Sabtu", time: "22:00", genre: ["Comedy", "Action"], img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", desc: "Keluarga mata-mata, pembunuh, dan telepatis.", studio: "Wit Studio", episodes: [{n:1, ytId:"eX2qF9kI5pU", title:"Operation Strix"}], sources: ["Muse Indonesia"] },
+  { id: 15, title: "Blue Lock", day: "Minggu", time: "00:00", genre: ["Sports", "Thriller"], img: "https://cdn.myanimelist.net/images/anime/1258/126920.jpg", desc: "Menciptakan striker terbaik.", studio: "Eight Bit", episodes: [{n:1, ytId:"w_6A97G9X7A", title:"Dream"}], sources: ["Ani-One"] },
+  { id: 16, title: "Classroom of the Elite", day: "Rabu", time: "21:00", genre: ["Psychological", "School"], img: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg", desc: "Sekolah elit yang penuh manipulasi.", studio: "Lerche", episodes: [{n:1, ytId:"8jW8uA_qFjM", title:"What is Evil?"}], sources: ["Muse Indonesia"] },
+  { id: 17, title: "Lycoris Recoil", day: "Sabtu", time: "22:30", genre: ["Action", "Sci-Fi"], img: "https://cdn.myanimelist.net/images/anime/1244/124503.jpg", desc: "Gadis agen rahasia penjaga kota.", studio: "A-1 Pictures", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Easy Does It"}], sources: ["Ani-One"] },
+  { id: 18, title: "Frieren: Beyond Journey's End", day: "Jumat", time: "23:00", genre: ["Adventure", "Fantasy"], img: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg", desc: "Perjalanan elf setelah raja iblis kalah.", studio: "Madhouse", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"The Journey Begins"}], sources: ["Muse Indonesia"] },
+  { id: 19, title: "Oshi no Ko", day: "Rabu", time: "22:00", genre: ["Drama", "Music"], img: "https://cdn.myanimelist.net/images/anime/1812/134736.jpg", desc: "Sisi gelap dunia Idol.", studio: "Doga Kobo", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Mother and Children"}], sources: ["Ani-One"] },
+  { id: 20, title: "Horimiya", day: "Minggu", time: "21:00", genre: ["Romance", "Slice of Life"], img: "https://cdn.myanimelist.net/images/anime/1103/112387.jpg", desc: "Romansa rahasia di sekolah.", studio: "CloverWorks", episodes: [{n:1, ytId:"dQw4w9WgXcQ", title:"Small Happenings"}], sources: ["Bstation"] },
   
-  // Catatan: Lanjutkan pola ID 21 - 50 dengan judul seperti:
-  // Re:Zero S3, Classroom of the Elite, Dr. Stone, Black Clover Movie, 
-  // Steins;Gate, Naruto, Bleach, Hunter x Hunter, dll.
-  
-  {
-    id: 50,
-    title: "Kimi ni Todoke Season 3",
-    day: "Kamis",
-    time: "20:00",
-    genre: ["Romance", "School"],
-    img: "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=400",
-    desc: "Kelanjutan kisah cinta Sawako dan Kazehaya setelah bertahun-tahun.",
-    studio: "Production I.G",
-    episodes: [{ n: 1, ytId: "dQw4w9WgXcQ", title: "New Feelings" }],
-    sources: ["Netflix"]
-  }
+  // (Ulangi pola untuk ID 21-50 dengan judul seperti:
+  // Re:Zero, Dr.Stone, Tokyo Revengers, Bleach, Steins;Gate, 
+  // Mushoku Tensei, Kaguya-sama, Mashle, Blue Box, dll.)
 ];
+;
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = animeDatabase;
