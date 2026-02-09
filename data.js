@@ -186,8 +186,8 @@ const animeDatabase = [
     studio: "Doga Kobo",
     playlistId: "PL4XCsSaamNEg-YgTtJdjuL9W7O-Y2yBwJ", // Playlist Ani-One
     episodes: [
-      { n: 1, ytId: "y6r2YfA8BTo", title: "Pacarku yang Sangat Keren" },
-      { n: 2, ytId: "rC-oM9x6_pI", title: "Pertandingan Olahraga" },
+      { n: 1, ytId: "m_mqEiALEkWz6iNi", title: "Pacarku yang Sangat Keren" },
+      { n: 2, ytId: "GjZhn8WxtGgMk2b7", title: "Pertandingan Olahraga" },
       { n: 3, ytId: "x0vQIsf4mEw", title: "Setelah Badai Berlalu" },
       { n: 4, ytId: "C1XfW3O4XqM", title: "Awal Musim Panas" },
       { n: 5, ytId: "T7yG8_pX9M2", title: "Bermain di Sungai" },
