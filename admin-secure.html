@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIMEHUB — Secure Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark-gray: #141414;
+      --mid-gray: #1f1f1f;
+      --accent-red: #ff0033;
+      --accent-red-hover: #cc0028;
+      --white: #ffffff;
+      --off-white: #e8e8e8;
+      --gray-text: #a0a0a0;
+      --success: #00ff88;
+      --warning: #ffaa00;
+      --danger: #ff3366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      line-height: 1.6;
+    }
+
+    /* LOGIN SCREEN */
+    .login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a0a0f 0%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-screen::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,0,51,0.15) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .login-box {
+      background: var(--dark-gray);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 2px solid rgba(255,0,51,0.2);
+      max-width: 450px;
+      width: 100%;
+      z-index: 1;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .login-logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent-red) 0%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      color: var(--gray-text);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 1rem;
+      background: var(--mid-gray);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .login-form input:focus {
+      outline: none;
+      border-color: var(--accent-red);
+    }
+
+    .login-form input::placeholder {
+      color: var(--gray-text);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent-red);
+      border: none;
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .login-btn:hover {
+      background: var(--accent-red-hover);
+      transform: translateY(-2px);
+    }
+
+    .login-error {
+      background: rgba(255,51,102,0.1);
+      border: 2px solid var(--danger);
+      color: var(--danger);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: none;
+      text-align: center;
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    .login-info {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(255,170,0,0.1);
+      border: 2px solid var(--warning);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: var(--warning);
+    }
+
+    /* MAIN ADMIN */
+    .admin-container {
+      display: none;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid rgba(255,0,51,0.2);
+    }
+
+    .admin-header h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--accent-red) 0%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .admin-user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logout-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--mid-gray);
+      border: 2px solid var(--accent-red);
+      border-radius: 10px;
+      color: var(--accent-red);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: var(--accent-red);
+      color: var(--white);
+    }
+
+    /* TABS */
+    .admin-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 1rem 2rem;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--gray-text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--off-white);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-red);
+      border-bottom-color: var(--accent-red);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* EXISTING STYLES */
+    .form-section {
+      background: var(--dark-gray);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      border: 2px solid rgba(255,0,51,0.1);
+    }
+
+    .form-section h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-red);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--off-white);
+    }
+
+    .form-group small {
+      color: var(--gray-text);
+      font-size: 0.85rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--mid-gray);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent-red);
+      background: rgba(31,31,31,0.8);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--accent-red);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-red-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--mid-gray);
+      color: var(--off-white);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: var(--black);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: var(--white);
+    }
+
+    /* PLAYLIST TAB */
+    .playlist-manager {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .playlist-input {
+      background: var(--dark-gray);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 2px solid rgba(255,0,51,0.1);
+    }
+
+    .playlist-list {
+      background: var(--dark-gray);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 2px solid rgba(255,0,51,0.1);
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .playlist-item {
+      background: var(--mid-gray);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .playlist-item:hover {
+      border-color: var(--accent-red);
+    }
+
+    .playlist-info h4 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .playlist-meta {
+      font-size: 0.85rem;
+      color: var(--gray-text);
+    }
+
+    .playlist-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* COMMENT MODERATION */
+    .comment-filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .comment-card {
+      background: var(--dark-gray);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border: 2px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .comment-card:hover {
+      border-color: rgba(255,0,51,0.2);
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .comment-user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .comment-anime-title {
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .comment-text {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .comment-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--dark-gray);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 2px solid rgba(255,0,51,0.1);
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 3rem;
+      color: var(--accent-red);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--gray-text);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-success {
+      background: rgba(0,255,136,0.1);
+      border: 2px solid var(--success);
+      color: var(--success);
+    }
+
+    .alert-danger {
+      background: rgba(255,51,102,0.1);
+      border: 2px solid var(--danger);
+      color: var(--danger);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-red);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .playlist-manager {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .admin-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <h1 class="login-logo">🔐 ADMIN</h1>
+      <p class="login-subtitle">Masukkan kode akses untuk melanjutkan</p>
+      
+      <div class="login-error" id="loginError">
+        Kode akses salah! Silakan coba lagi.
+      </div>
+      
+      <form class="login-form" id="loginForm" onsubmit="login(event)">
+        <input 
+          type="password" 
+          id="accessCode" 
+          placeholder="Masukkan kode akses"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" class="login-btn">🚀 Masuk Admin Panel</button>
+      </form>
+
+      <div class="login-info">
+        <strong>⚠️ Area Terbatas</strong><br>
+        Hanya admin yang memiliki kode akses yang dapat mengakses panel ini.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN PANEL -->
+  <div class="admin-container" id="adminContainer">
+    
+    <!-- HEADER -->
+    <div class="admin-header">
+      <div>
+        <h1>🎬 ADMIN PANEL</h1>
+        <p style="color: var(--gray-text);">Selamat datang, Admin <span id="adminName"></span></p>
+      </div>
+      <div class="admin-user-info">
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+      </div>
+    </div>
+
+    <!-- ALERT -->
+    <div id="alertContainer"></div>
+
+    <!-- TABS -->
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+      <button class="tab-btn" onclick="switchTab('anime')">📝 Tambah Anime</button>
+      <button class="tab-btn" onclick="switchTab('playlist')">📺 Playlist Manager</button>
+      <button class="tab-btn" onclick="switchTab('comments')">💬 Moderasi Komentar</button>
+    </div>
+
+    <!-- TAB CONTENT -->
+    
+    <!-- DASHBOARD TAB -->
+    <div class="tab-content active" id="tabDashboard">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="statTotalAnime">0</div>
+          <div class="stat-label">Total Anime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statTotalEpisodes">0</div>
+          <div class="stat-label">Total Episodes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statTotalPlaylists">0</div>
+          <div class="stat-label">Total Playlists</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statPendingComments">0</div>
+          <div class="stat-label">Pending Comments</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>📈 Quick Stats</h2>
+        <p style="color: var(--gray-text); line-height: 1.8;">
+          • Update terakhir: <strong id="lastUpdate">-</strong><br>
+          • Admin login: <strong id="loginCount">0</strong> kali<br>
+          • Browser: <strong id="browserInfo">-</strong><br>
+          • Session dimulai: <strong id="sessionStart">-</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- ANIME TAB (existing form) -->
+    <div class="tab-content" id="tabAnime">
+      <!-- Paste form dari admin.html sebelumnya di sini -->
+      <div class="form-section">
+        <h2>📝 Informasi Anime</h2>
+        
+        <div class="form-group">
+          <label>Judul Anime *</label>
+          <input type="text" id="title" placeholder="Contoh: Jujutsu Kaisen Season 3">
+        </div>
+
+        <div class="form-group">
+          <label>Hari Tayang *</label>
+          <select id="day">
+            <option value="">Pilih Hari</option>
+            <option value="Senin">Senin</option>
+            <option value="Selasa">Selasa</option>
+            <option value="Rabu">Rabu</option>
+            <option value="Kamis">Kamis</option>
+            <option value="Jumat">Jumat</option>
+            <option value="Sabtu">Sabtu</option>
+            <option value="Minggu">Minggu</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Jam Tayang *</label>
+          <input type="text" id="time" placeholder="Contoh: 23:00">
+        </div>
+
+        <div class="form-group">
+          <label>Studio Animasi</label>
+          <input type="text" id="studio" placeholder="Contoh: MAPPA, ufotable">
+        </div>
+
+        <div class="form-group">
+          <label>URL Gambar Cover *</label>
+          <input type="url" id="img" placeholder="https://example.com/cover.jpg">
+        </div>
+
+        <div class="form-group">
+          <label>Deskripsi Singkat *</label>
+          <textarea id="desc" placeholder="Tulis sinopsis anime..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="generateAnimeCode()">⚡ Generate Database Code</button>
+      </div>
+    </div>
+
+    <!-- PLAYLIST TAB -->
+    <div class="tab-content" id="tabPlaylist">
+      <div class="playlist-manager">
+        
+        <!-- LEFT: Input Playlist -->
+        <div class="playlist-input">
+          <h2 style="font-family: 'Archivo Black', sans-serif; margin-bottom: 1.5rem; color: var(--accent-red);">➕ Tambah Playlist</h2>
+          
+          <div class="form-group">
+            <label>Nama Playlist *</label>
+            <input type="text" id="playlistName" placeholder="Contoh: Best Action Anime 2026">
+          </div>
+
+          <div class="form-group">
+            <label>YouTube Playlist ID *</label>
+            <input type="text" id="playlistId" placeholder="PLxxxxxxxxxxxxxx">
+            <small>Cara dapat: Buka playlist YouTube → Copy dari URL (setelah ?list=)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Kategori</label>
+            <select id="playlistCategory">
+              <option value="ongoing">Ongoing Series</option>
+              <option value="popular">Most Popular</option>
+              <option value="seasonal">Seasonal Picks</option>
+              <option value="genre">By Genre</option>
+              <option value="studio">By Studio</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea id="playlistDesc" placeholder="Deskripsi playlist (optional)"></textarea>
+          </div>
+
+          <button class="btn btn-primary" onclick="addPlaylist()">📺 Tambah Playlist</button>
+        </div>
+
+        <!-- RIGHT: Playlist List -->
+        <div class="playlist-list">
+          <h2 style="font-family: 'Archivo Black', sans-serif; margin-bottom: 1.5rem; color: var(--accent-red);">📋 Daftar Playlist</h2>
+          <div id="playlistContainer">
+            <!-- Playlist items akan muncul di sini -->
+            <p style="text-align: center; color: var(--gray-text); padding: 2rem;">Belum ada playlist. Tambahkan yang pertama!</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Output Code -->
+      <div id="playlistOutput" style="display: none; margin-top: 2rem;" class="form-section">
+        <h2>✅ Kode Playlist Generated!</h2>
+        <div style="background: var(--black); padding: 1.5rem; border-radius: 8px; overflow-x: auto;">
+          <pre id="playlistCode" style="color: var(--success); font-family: monospace; font-size: 0.9rem;"></pre>
+        </div>
+        <button class="btn btn-success" onclick="copyPlaylistCode()">📋 Copy Code</button>
+      </div>
+    </div>
+
+    <!-- COMMENTS TAB -->
+    <div class="tab-content" id="tabComments">
+      
+      <div class="comment-filters">
+        <button class="btn btn-secondary btn-small" onclick="filterComments('all')">Semua</button>
+        <button class="btn btn-secondary btn-small" onclick="filterComments('pending')">⏳ Pending</button>
+        <button class="btn btn-secondary btn-small" onclick="filterComments('approved')">✅ Approved</button>
+        <button class="btn btn-secondary btn-small" onclick="filterComments('spam')">🚫 Spam</button>
+      </div>
+
+      <div id="commentsContainer">
+        <!-- Comments akan di-generate di sini -->
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // ===========================================
+    // AUTHENTICATION SYSTEM
+    // ===========================================
+
+    // KONFIGURASI ADMIN (UBAH INI!)
+    const ADMIN_CODES = {
+      'ANIME2026ADMIN': 'SuperAdmin',
+      'MODERATOR2026': 'Moderator',
+      'GUEST2026': 'Guest'
+    };
+
+    // Check if already logged in
+    window.onload = function() {
+      const loggedAdmin = localStorage.getItem('animehub_admin');
+      const loginTime = localStorage.getItem('animehub_login_time');
+      
+      // Session expires after 24 hours
+      if (loggedAdmin && loginTime) {
+        const elapsed = Date.now() - parseInt(loginTime);
+        if (elapsed < 24 * 60 * 60 * 1000) {
+          enterAdminPanel(loggedAdmin);
+          return;
+        }
+      }
+      
+      // Show login screen
+      document.getElementById('loginScreen').style.display = 'flex';
+    };
+
+    function login(event) {
+      event.preventDefault();
+      
+      const code = document.getElementById('accessCode').value.trim();
+      const errorDiv = document.getElementById('loginError');
+      
+      if (ADMIN_CODES[code]) {
+        const adminName = ADMIN_CODES[code];
+        localStorage.setItem('animehub_admin', adminName);
+        localStorage.setItem('animehub_login_time', Date.now().toString());
+        
+        // Track login count
+        const loginCount = parseInt(localStorage.getItem('animehub_login_count') || '0') + 1;
+        localStorage.setItem('animehub_login_count', loginCount.toString());
+        
+        enterAdminPanel(adminName);
+      } else {
+        errorDiv.style.display = 'block';
+        setTimeout(() => {
+          errorDiv.style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    function enterAdminPanel(adminName) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminContainer').style.display = 'block';
+      document.getElementById('adminName').textContent = adminName;
+      
+      // Initialize dashboard
+      initDashboard();
+      loadPlaylists();
+      loadComments();
+    }
+
+    function logout() {
+      if (confirm('Yakin ingin logout?')) {
+        localStorage.removeItem('animehub_admin');
+        localStorage.removeItem('animehub_login_time');
+        location.reload();
+      }
+    }
+
+    // ===========================================
+    // TAB SYSTEM
+    // ===========================================
+    
+    function switchTab(tabName) {
+      // Update buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Update content
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+    }
+
+    // ===========================================
+    // DASHBOARD
+    // ===========================================
+    
+    function initDashboard() {
+      // Load from localStorage or default
+      const playlists = JSON.parse(localStorage.getItem('animehub_playlists') || '[]');
+      const comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+      
+      // Calculate stats
+      let totalEpisodes = 0;
+      if (typeof animeDatabase !== 'undefined') {
+        animeDatabase.forEach(anime => {
+          totalEpisodes += anime.episodes.length;
+        });
+      }
+      
+      const pendingComments = comments.filter(c => c.status === 'pending').length;
+      
+      // Update UI
+      document.getElementById('statTotalAnime').textContent = animeDatabase ? animeDatabase.length : 0;
+      document.getElementById('statTotalEpisodes').textContent = totalEpisodes;
+      document.getElementById('statTotalPlaylists').textContent = playlists.length;
+      document.getElementById('statPendingComments').textContent = pendingComments;
+      
+      // Other stats
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleString('id-ID');
+      document.getElementById('loginCount').textContent = localStorage.getItem('animehub_login_count') || '1';
+      document.getElementById('browserInfo').textContent = navigator.userAgent.split(' ').pop();
+      document.getElementById('sessionStart').textContent = new Date(parseInt(localStorage.getItem('animehub_login_time'))).toLocaleTimeString('id-ID');
+    }
+
+    // ===========================================
+    // PLAYLIST MANAGER
+    // ===========================================
+    
+    function addPlaylist() {
+      const name = document.getElementById('playlistName').value.trim();
+      const id = document.getElementById('playlistId').value.trim();
+      const category = document.getElementById('playlistCategory').value;
+      const desc = document.getElementById('playlistDesc').value.trim();
+      
+      if (!name || !id) {
+        showAlert('Nama dan ID playlist wajib diisi!', 'danger');
+        return;
+      }
+      
+      // Get existing playlists
+      let playlists = JSON.parse(localStorage.getItem('animehub_playlists') || '[]');
+      
+      // Add new playlist
+      const newPlaylist = {
+        id: Date.now(),
+        name,
+        playlistId: id,
+        category,
+        description: desc,
+        createdAt: new Date().toISOString()
+      };
+      
+      playlists.push(newPlaylist);
+      localStorage.setItem('animehub_playlists', JSON.stringify(playlists));
+      
+      // Clear form
+      document.getElementById('playlistName').value = '';
+      document.getElementById('playlistId').value = '';
+      document.getElementById('playlistDesc').value = '';
+      
+      showAlert('Playlist berhasil ditambahkan!', 'success');
+      loadPlaylists();
+      generatePlaylistCode(playlists);
+    }
+
+    function loadPlaylists() {
+      const playlists = JSON.parse(localStorage.getItem('animehub_playlists') || '[]');
+      const container = document.getElementById('playlistContainer');
+      
+      if (playlists.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--gray-text); padding: 2rem;">Belum ada playlist. Tambahkan yang pertama!</p>';
+        return;
+      }
+      
+      container.innerHTML = playlists.map(playlist => `
+        <div class="playlist-item">
+          <div class="playlist-info">
+            <h4>${playlist.name}</h4>
+            <div class="playlist-meta">
+              🎬 ID: ${playlist.playlistId} • 📂 ${playlist.category} • 📅 ${new Date(playlist.createdAt).toLocaleDateString('id-ID')}
+            </div>
+          </div>
+          <div class="playlist-actions">
+            <button class="btn btn-danger btn-small" onclick="deletePlaylist(${playlist.id})">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+      
+      // Update dashboard
+      document.getElementById('statTotalPlaylists').textContent = playlists.length;
+    }
+
+    function deletePlaylist(id) {
+      if (confirm('Yakin ingin hapus playlist ini?')) {
+        let playlists = JSON.parse(localStorage.getItem('animehub_playlists') || '[]');
+        playlists = playlists.filter(p => p.id !== id);
+        localStorage.setItem('animehub_playlists', JSON.stringify(playlists));
+        
+        showAlert('Playlist berhasil dihapus!', 'success');
+        loadPlaylists();
+      }
+    }
+
+    function generatePlaylistCode(playlists) {
+      const code = JSON.stringify(playlists, null, 2);
+      document.getElementById('playlistCode').textContent = code;
+      document.getElementById('playlistOutput').style.display = 'block';
+    }
+
+    function copyPlaylistCode() {
+      const code = document.getElementById('playlistCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showAlert('Kode playlist berhasil dicopy!', 'success');
+      });
+    }
+
+    // ===========================================
+    // COMMENT MODERATION
+    // ===========================================
+    
+    function loadComments() {
+      // Demo comments (karena Disqus tidak bisa diakses dari sini)
+      const comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+      
+      // Add demo comments jika kosong
+      if (comments.length === 0) {
+        const demoComments = [
+          {
+            id: 1,
+            user: 'User123',
+            anime: 'Jujutsu Kaisen Season 3',
+            text: 'Anime ini keren banget! Episode terbarunya epic!',
+            status: 'pending',
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 2,
+            user: 'AnimeFan99',
+            anime: 'Demon Slayer',
+            text: 'Kapan episode berikutnya rilis?',
+            status: 'approved',
+            createdAt: new Date(Date.now() - 86400000).toISOString()
+          }
+        ];
+        localStorage.setItem('animehub_comments', JSON.stringify(demoComments));
+      }
+      
+      renderComments('all');
+    }
+
+    function renderComments(filter) {
+      const comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+      const container = document.getElementById('commentsContainer');
+      
+      const filtered = filter === 'all' ? comments : comments.filter(c => c.status === filter);
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--gray-text); padding: 2rem;">Tidak ada komentar.</p>';
+        return;
+      }
+      
+      container.innerHTML = filtered.map(comment => `
+        <div class="comment-card" data-status="${comment.status}">
+          <div class="comment-header">
+            <div class="comment-user">
+              <div class="user-avatar">${comment.user.charAt(0).toUpperCase()}</div>
+              <div>
+                <strong>${comment.user}</strong><br>
+                <small style="color: var(--gray-text);">${new Date(comment.createdAt).toLocaleString('id-ID')}</small>
+              </div>
+            </div>
+            <span class="badge" style="padding: 0.3rem 0.8rem; background: ${comment.status === 'approved' ? 'var(--success)' : comment.status === 'pending' ? 'var(--warning)' : 'var(--danger)'}; color: var(--black); border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
+              ${comment.status.toUpperCase()}
+            </span>
+          </div>
+          <div class="comment-anime-title">📺 ${comment.anime}</div>
+          <div class="comment-text">${comment.text}</div>
+          <div class="comment-actions">
+            <button class="btn btn-success btn-small" onclick="approveComment(${comment.id})">✅ Approve</button>
+            <button class="btn btn-danger btn-small" onclick="deleteComment(${comment.id})">🗑️ Delete</button>
+            <button class="btn btn-secondary btn-small" onclick="markSpam(${comment.id})">🚫 Spam</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterComments(filter) {
+      renderComments(filter);
+    }
+
+    function approveComment(id) {
+      let comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+      const comment = comments.find(c => c.id === id);
+      if (comment) {
+        comment.status = 'approved';
+        localStorage.setItem('animehub_comments', JSON.stringify(comments));
+        showAlert('Komentar disetujui!', 'success');
+        renderComments('all');
+        initDashboard();
+      }
+    }
+
+    function deleteComment(id) {
+      if (confirm('Yakin ingin hapus komentar ini?')) {
+        let comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+        comments = comments.filter(c => c.id !== id);
+        localStorage.setItem('animehub_comments', JSON.stringify(comments));
+        showAlert('Komentar dihapus!', 'success');
+        renderComments('all');
+        initDashboard();
+      }
+    }
+
+    function markSpam(id) {
+      let comments = JSON.parse(localStorage.getItem('animehub_comments') || '[]');
+      const comment = comments.find(c => c.id === id);
+      if (comment) {
+        comment.status = 'spam';
+        localStorage.setItem('animehub_comments', JSON.stringify(comments));
+        showAlert('Ditandai sebagai spam!', 'success');
+        renderComments('all');
+        initDashboard();
+      }
+    }
+
+    // ===========================================
+    // ANIME GENERATOR (existing)
+    // ===========================================
+    
+    function generateAnimeCode() {
+      const title = document.getElementById('title').value.trim();
+      const day = document.getElementById('day').value;
+      const time = document.getElementById('time').value.trim();
+      const img = document.getElementById('img').value.trim();
+      const desc = document.getElementById('desc').value.trim();
+      const studio = document.getElementById('studio').value.trim();
+      
+      if (!title || !day || !time || !img || !desc) {
+        showAlert('Harap isi semua field yang wajib!', 'danger');
+        return;
+      }
+      
+      const animeObject = {
+        id: Date.now(),
+        title,
+        day,
+        time,
+        genre: ['Action'],
+        img,
+        desc,
+        studio: studio || 'Unknown',
+        episodes: [],
+        sources: ['Muse Indonesia']
+      };
+      
+      const code = JSON.stringify(animeObject, null, 2);
+      console.log('Generated:', code);
+      
+      showAlert('Anime berhasil digenerate! Check console.', 'success');
+    }
+
+    // ===========================================
+    // UTILITIES
+    // ===========================================
+    
+    function showAlert(message, type = 'success') {
+      const alertContainer = document.getElementById('alertContainer');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      alertContainer.appendChild(alert);
+
+      setTimeout(() => {
+        alert.remove();
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
