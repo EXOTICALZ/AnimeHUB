@@ -184,26 +184,25 @@ const animeDatabase = [
     img: "https://images.weserv.nl/?url=https://cdn.myanimelist.net/images/anime/1015/122397.jpg",
     desc: "Izumi adalah cowok yang sangat tidak beruntung, tapi pacarnya, Shikimori, selalu siap melindunginya dengan aksi yang sangat keren!",
     studio: "Doga Kobo",
-    playlistId: "PLxSscENEp7Ji_m7_v_q8jW8udQw4w9Wg", // ID Playlist Baru (Lebih Stabil)
+    playlistId: "PL4XCsSaamNEg-YgTtJdjuL9W7O-Y2yBwJ",
     episodes: [
-      { n: 1, ytId: "y6r2YfA8BTo", title: "Pacarku Sangat Keren" },
-      { n: 2, ytId: "rC-oM9x6_pI", title: "Pertandingan Olahraga" },
-      { n: 3, ytId: "z1f4Y_m7Xo0", title: "Setelah Badai Berlalu" },
-      { n: 4, ytId: "v9WkU9_m5Xo", title: "Awal Musim Panas" },
-      { n: 5, ytId: "XQxO_S-m9Xo", title: "Bermain di Sungai" },
-      { n: 6, ytId: "09yL8_qP2S4", title: "Festival Kembang Api" },
-      { n: 7, ytId: "Gv_0WkF9C6M", title: "Festival Budaya I" },
-      { n: 8, ytId: "vL6yN7-B7nE", title: "Festival Budaya II" },
-      { n: 9, ytId: "z8WkU9_m5Xo", title: "Kepolosan dan Kedewasaan" },
-      { n: 10, ytId: "X9wL0_pP8Xo", title: "Keinginan Menang" },
-      { n: 11, ytId: "R7yL2_qX3M8", title: "Shikimori yang Manis" },
-      { n: 12, ytId: "T9vL5_bB1nE", title: "Lebih dari Sekadar Cantik" }
-  ],
-  sources: ["Ani-One Asia"]
+      { n: 1, ytId: "i3nhUubChP4", title: "Pacarku Sangat Keren" },
+      { n: 2, ytId: "bm3qmO_FDE8", title: "Angin dan Awan, Permainan Bola!" },
+      { n: 3, ytId: "UY6dI7UM4rM", title: "Setelah Badai Berlalu" },
+      { n: 4, ytId: "R3kO7MvS008", title: "Awal Musim Panas yang Cerah!" },
+      { n: 5, ytId: "rYpB1D-x2hQ", title: "Liburan Musim Panas, Bermain di Sungai!" },
+      { n: 6, ytId: "fUfU0K1vIu0", title: "Dengan Kembang Api, Musim Panas Berakhir" },
+      { n: 7, ytId: "5N0M6-S6990", title: "Festival Budaya I" },
+      { n: 8, ytId: "Y2U1X4S-78U", title: "Festival Budaya II" },
+      { n: 9, ytId: "z0M4N9-Uu18", title: "Kepolosan dan Kecerobohan" },
+      { n: 10, ytId: "m1U8K4-R3r0", title: "Keinginan Untuk Menang" },
+      { n: 11, ytId: "P2kO9M-L5u1", title: "Bukan Sekadar Manis" },
+      { n: 12, ytId: "X3u1R0-K8m4", title: "Lebih dari Sekadar Mimpi" }
+    ],
+    sources: ["Muse Asia"]
   }
 ];
 
-// Export untuk digunakan di file lain
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = animeDatabase;
 }
