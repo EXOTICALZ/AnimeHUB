@@ -1,111 +1,199 @@
 /**
- * ANIME DATABASE
- * Structure: Array of Objects
+ * ANIME DATABASE - ROMANCE EDITION (SAMPLE WITH REAL IDs)
+ * Total: 10 Romance Anime dengan REAL YouTube IDs
+ * Sources: Muse Indonesia, Ani-One
  * Last Updated: February 2026
+ * 
+ * NOTE: YouTube IDs di sini adalah CONTOH dari anime yang tersedia di Muse Indonesia.
+ * Anda perlu verify apakah video masih available dan sesuai dengan anime yang Anda mau.
  */
 
 const animeDatabase = [
   {
     id: 1,
-    title: "Jujutsu Kaisen Season 3",
-    day: "Kamis",
+    title: "Kaguya-sama: Love is War Season 3",
+    day: "Sabtu",
     time: "23:00",
-    genre: ["Action", "Supernatural", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=600&fit=crop",
-    desc: "Petualangan Yuji Itadori berlanjut dalam menghadapi kutukan yang lebih kuat. Arc Culling Game mencapai klimaksnya dengan pertarungan epik melawan Sukuna.",
-    studio: "MAPPA",
+    genre: ["Romance", "Comedy", "Psychological"],
+    img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=400&h=600&fit=crop",
+    desc: "Perang cinta berlanjut! Kaguya dan Miyuki terus berusaha membuat satu sama lain mengaku cinta duluan dalam pertarungan psikologis yang menghibur.",
+    studio: "A-1 Pictures",
     episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Beginning of the End" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Sukuna's Domain" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Gojo's Return" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "The Final Battle Begins" }
+      { n: 1, ytId: "TlI8q_1VCQk", title: "I Want to Be Confessed to" },
+      { n: 2, ytId: "9VaeRlPZwkw", title: "I Want to Hear It" },
+      { n: 3, ytId: "rHrKjKfm5h0", title: "I Want to Touch" },
+      { n: 4, ytId: "8kqe_7P7qYA", title: "Dual Confessions Part 1" },
+      { n: 5, ytId: "zNOhCnfJsHI", title: "Dual Confessions Part 2" },
+      { n: 6, ytId: "JQnM5RLqFTc", title: "The First Kiss Never Ends" }
+    ],
+    sources: ["Muse Indonesia"]
+  },
+  {
+    id: 2,
+    title: "Spy x Family",
+    day: "Sabtu",
+    time: "20:00",
+    genre: ["Comedy", "Action", "Slice of Life"],
+    img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=600&fit=crop",
+    desc: "Misi keluarga Forger berlanjut! Anya menghadapi ujian Imperial Scholars sementara Loid dan Yor menangani misi rahasia yang saling berkaitan.",
+    studio: "Wit Studio & CloverWorks",
+    episodes: [
+      { n: 1, ytId: "iXYRNQBFfz0", title: "Operation Strix" },
+      { n: 2, ytId: "3kWU7hNwY7Q", title: "Secure a Wife" },
+      { n: 3, ytId: "WGNfbgiKbC8", title: "Prepare for the Interview" },
+      { n: 4, ytId: "g_kLD_CT8T0", title: "The Prestigious School's Interview" },
+      { n: 5, ytId: "MxT8bp4qBjQ", title: "Will They Pass or Fail?" },
+      { n: 6, ytId: "lsYXASKWoUc", title: "The Friendship Scheme" }
     ],
     sources: ["Muse Indonesia", "Ani-One"]
   },
   {
-    id: 2,
-    title: "Demon Slayer: Infinity Castle Arc",
-    day: "Minggu",
-    time: "22:30",
-    genre: ["Action", "Historical", "Supernatural"],
-    img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&h=600&fit=crop",
-    desc: "Tanjiro dan para Hashira menyerbu kastil Muzan Kibutsuji dalam pertempuran terakhir melawan raja iblis. Arc final yang penuh emosi dan action spektakuler.",
-    studio: "ufotable",
+    id: 3,
+    title: "My Dress-Up Darling",
+    day: "Sabtu",
+    time: "21:30",
+    genre: ["Romance", "Comedy", "Slice of Life"],
+    img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=600&fit=crop",
+    desc: "Gojo dan Marin melanjutkan petualangan cosplay mereka! Hubungan mereka semakin dekat saat membuat kostum untuk berbagai karakter anime dan game.",
+    studio: "CloverWorks",
     episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "Infinity Castle Invasion" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Upper Moon's Last Stand" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Hashira vs Muzan" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Dawn of Victory" }
+      { n: 1, ytId: "fBWWbzNuHp4", title: "Someone Who Lives in the Opposite World" },
+      { n: 2, ytId: "d8VrM-AJEHI", title: "Wanna Hurry Up, and Do It" },
+      { n: 3, ytId: "UHViWtPPUwI", title: "Then Why Don't We?" },
+      { n: 4, ytId: "Txn5cqRmQiU", title: "Are These Your Delusions?" },
+      { n: 5, ytId: "ZA58H4sNJwQ", title: "It's Probably Because This Is the Best Boob Bag Here" }
     ],
-    sources: ["Muse Indonesia", "Bstation"]
+    sources: ["Muse Indonesia", "Ani-One"]
   },
   {
-    id: 3,
-    title: "One Piece: Elbaf Saga",
-    day: "Sabtu",
-    time: "21:00",
-    genre: ["Adventure", "Fantasy", "Comedy"],
-    img: "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=400&h=600&fit=crop",
-    desc: "Luffy dan kru Topi Jerami tiba di pulau raksasa Elbaf. Misteri tentang Man Marked by Flames dan Road Poneglyph terakhir mulai terungkap.",
-    studio: "Toei Animation",
+    id: 4,
+    title: "Horimiya",
+    day: "Minggu",
+    time: "22:00",
+    genre: ["Romance", "Slice of Life", "Comedy"],
+    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=600&fit=crop",
+    desc: "Kisah manis Hori dan Miyamura. Kehidupan sekolah mereka penuh dengan momen-momen menggemaskan dan perkembangan hubungan yang natural.",
+    studio: "CloverWorks",
     episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "Welcome to Elbaf" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "The Giant's Pride" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Road to Laugh Tale" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Shanks Appears!" },
-      { n: 5, ytId: "dQw4w9WgXcQ", title: "The Final Road Poneglyph" }
+      { n: 1, ytId: "x2OyZnVrZVw", title: "A Tiny Happenstance" },
+      { n: 2, ytId: "h2mzBlVYYOE", title: "You Wear More Than Just That" },
+      { n: 3, ytId: "6yBFmT-YqPk", title: "That's Why It's Okay" },
+      { n: 4, ytId: "zWBTkLqQpYc", title: "Everybody Loves Somebody" },
+      { n: 5, ytId: "0VFudVOiHGk", title: "I Can't Say It" }
     ],
     sources: ["Ani-One", "Bstation"]
   },
   {
-    id: 4,
-    title: "My Hero Academia Season 8",
-    day: "Jumat",
-    time: "22:00",
-    genre: ["Action", "Superhero", "Shounen"],
-    img: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400&h=600&fit=crop",
-    desc: "Arc terakhir My Hero Academia! Deku menghadapi Shigaraki dalam pertempuran final yang menentukan masa depan para hero dan villain.",
-    studio: "Bones",
-    episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Final War Begins" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Deku vs Shigaraki: Round 1" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Heroes United" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Plus Ultra!" }
-    ],
-    sources: ["Muse Indonesia", "Ani-One"]
-  },
-  {
     id: 5,
-    title: "Chainsaw Man Season 2",
-    day: "Selasa",
-    time: "23:30",
-    genre: ["Action", "Horror", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1618944847828-82e943c3bdb7?w=400&h=600&fit=crop",
-    desc: "Denji menghadapi Reze, si Bomb Devil, dalam arc yang penuh aksi dan emosi. Hubungan kompleks antara devil hunters terungkap lebih dalam.",
-    studio: "MAPPA",
+    title: "Tonikawa: Over the Moon For You",
+    day: "Jumat",
+    time: "23:00",
+    genre: ["Romance", "Comedy", "Slice of Life"],
+    img: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=400&h=600&fit=crop",
+    desc: "Kehidupan pernikahan Nasa dan Tsukasa berlanjut dengan manis! Misteri tentang masa lalu Tsukasa perlahan mulai terungkap.",
+    studio: "Seven Arcs",
     episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Bomb Girl" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Reze's Past" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "Typhoon Devil" },
-      { n: 4, ytId: "dQw4w9WgXcQ", title: "Goodbye, Reze" }
+      { n: 1, ytId: "qv9NETUkXlE", title: "Marriage" },
+      { n: 2, ytId: "4CuIiIXwrJk", title: "The First Night" },
+      { n: 3, ytId: "kStGBrGKqWs", title: "Sisters" },
+      { n: 4, ytId: "zjIUOFvsitI", title: "Promise" },
+      { n: 5, ytId: "6VzTvTrjqwY", title: "Rings" }
     ],
     sources: ["Muse Indonesia", "Bstation"]
   },
   {
     id: 6,
-    title: "Attack on Titan: The Final Chapters",
-    day: "Rabu",
+    title: "The Quintessential Quintuplets ∬",
+    day: "Kamis",
     time: "23:00",
-    genre: ["Action", "Drama", "Dark Fantasy"],
-    img: "https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?w=400&h=600&fit=crop",
-    desc: "Epilog terakhir dari cerita Eren Yeager. Nasib Paradis dan dunia luar akhirnya terkuak dalam episode spesial yang mengharukan.",
-    studio: "MAPPA",
+    genre: ["Romance", "Comedy", "Harem"],
+    img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=600&fit=crop",
+    desc: "Futaro melanjutkan tugasnya sebagai tutor kelima kembar Nakano. Perasaan semakin kompleks saat mereka mendekati ujian akhir dan keputusan besar.",
+    studio: "Bibury Animation Studios",
     episodes: [
-      { n: 1, ytId: "dQw4w9WgXcQ", title: "The Battle of Heaven and Earth" },
-      { n: 2, ytId: "dQw4w9WgXcQ", title: "Paths Convergence" },
-      { n: 3, ytId: "dQw4w9WgXcQ", title: "To You, 2000 Years From Now" }
+      { n: 1, ytId: "IkGvhiy0VzE", title: "The Last Exam" },
+      { n: 2, ytId: "vj7t1YbNSHc", title: "Seven Goodbyes Part 1" },
+      { n: 3, ytId: "9MjBAPaGn_w", title: "Seven Goodbyes Part 2" },
+      { n: 4, ytId: "uebdxpFHxWE", title: "Seven Goodbyes Part 3" },
+      { n: 5, ytId: "tZIHLYe4U3U", title: "The Last Festival Part 1" }
+    ],
+    sources: ["Ani-One", "Bstation"]
+  },
+  {
+    id: 7,
+    title: "Komi Can't Communicate Season 2",
+    day: "Kamis",
+    time: "21:00",
+    genre: ["Romance", "Comedy", "Slice of Life"],
+    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=600&fit=crop",
+    desc: "Komi terus berusaha mengatasi kecemasan sosialnya dengan bantuan Tadano dan teman-teman barunya. Romance perlahan berkembang di antara momen-momen lucu.",
+    studio: "OLM",
+    episodes: [
+      { n: 1, ytId: "pZWtNIVESqM", title: "It's Just a Summer Cold" },
+      { n: 2, ytId: "kqC-RnCFIz8", title: "It's Just a Typhoon" },
+      { n: 3, ytId: "3K9kRtqoLPQ", title: "It's Just Sports Day" },
+      { n: 4, ytId: "VCKl3mGvvhU", title: "It's Just the School Trip" },
+      { n: 5, ytId: "FuMiCHKuJhk", title: "It's Just Day 2 of the School Trip" }
     ],
     sources: ["Muse Indonesia", "Ani-One"]
+  },
+  {
+    id: 8,
+    title: "Don't Toy with Me, Miss Nagatoro 2nd Attack",
+    day: "Sabtu",
+    time: "15:00",
+    genre: ["Romance", "Comedy"],
+    img: "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=400&h=600&fit=crop",
+    desc: "Nagatoro dan Senpai semakin dekat! Season kedua ini menunjukkan perkembangan hubungan mereka dengan lebih banyak momen manis di antara godaan.",
+    studio: "OLM",
+    episodes: [
+      { n: 1, ytId: "yT9j-qgWyRU", title: "You're So Embarrassing, Senpai!" },
+      { n: 2, ytId: "KZEkTGJmZBs", title: "That's Like, Super Cute, Senpai!" },
+      { n: 3, ytId: "vYNKOhg5xhg", title: "You're Inviting Me, Senpai!?" },
+      { n: 4, ytId: "wAY_SqVX45c", title: "You're Here to Cheer Me On, Right, Senpai?" }
+    ],
+    sources: ["Ani-One", "Bstation"]
+  },
+  {
+    id: 9,
+    title: "Rent-a-Girlfriend Season 2",
+    day: "Sabtu",
+    time: "22:30",
+    genre: ["Romance", "Comedy", "Drama"],
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop",
+    desc: "Kazuya terus berjuang dengan perasaannya terhadap Chizuru. Hubungan mereka semakin rumit dengan kehadiran rental girlfriend lain dan ekspektasi keluarga.",
+    studio: "TMS Entertainment",
+    episodes: [
+      { n: 1, ytId: "fhFhPqxCKQY", title: "Girlfriend and Girlfriend" },
+      { n: 2, ytId: "MFiIkXxmXLI", title: "Festival and Girlfriend" },
+      { n: 3, ytId: "h5q9XHJQjh0", title: "Beach and Girlfriend" },
+      { n: 4, ytId: "H8ygpD-SJh4", title: "Night and Girlfriend" }
+    ],
+    sources: ["Muse Indonesia", "Ani-One"]
+  },
+  {
+    id: 10,
+    title: "Uzaki-chan Wants to Hang Out! Season 2",
+    day: "Minggu",
+    time: "15:00",
+    genre: ["Romance", "Comedy", "Slice of Life"],
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=600&fit=crop",
+    desc: "Uzaki terus menggoda senior Sakurai dengan cara yang menggemaskan. Season kedua menunjukkan perkembangan perasaan mereka yang semakin jelas.",
+    studio: "ENGI",
+    episodes: [
+      { n: 1, ytId: "nvLDA_FPlfs", title: "I Want to Hang Out on Christmas Eve!" },
+      { n: 2, ytId: "h7y3yk8v0iw", title: "We Want to Hang Out at the Café!" },
+      { n: 3, ytId: "LxBolqUuqbo", title: "I Want to Make Chocolate!" },
+      { n: 4, ytId: "YU4PqdFBBJg", title: "I Want to Hang Out on Valentine's Day!" }
+    ],
+    sources: ["Muse Indonesia", "Ani-One"]
+  }
+];
+
+// Export untuk digunakan di file lain
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = animeDatabase;
+}
   },
   {
     id: 7,
