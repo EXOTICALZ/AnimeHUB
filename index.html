@@ -676,38 +676,102 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 16px 20px;
+            padding: 16px 24px;
             border-radius: 12px;
             color: white;
             font-size: 14px;
             font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             z-index: 1000;
-            animation: notificationSlide 0.3s ease-out;
-            max-width: 300px;
+            animation: notificationSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 350px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .notification:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .notification:active {
+            transform: translateY(0);
         }
 
         @keyframes notificationSlide {
             from {
-                transform: translateX(400px);
+                transform: translateX(400px) scale(0.8);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
                 opacity: 1;
             }
         }
 
+        .notification::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 12px 0 0 12px;
+        }
+
         .notification.success {
-            background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.95) 0%, rgba(69, 160, 73, 0.95) 100%);
+        }
+
+        .notification.success::before {
+            background: #4CAF50;
         }
 
         .notification.error {
-            background: linear-gradient(135deg, #FF5252 0%, #E53935 100%);
+            background: linear-gradient(135deg, rgba(255, 82, 82, 0.95) 0%, rgba(229, 57, 53, 0.95) 100%);
+        }
+
+        .notification.error::before {
+            background: #FF5252;
         }
 
         .notification.info {
-            background: linear-gradient(135deg, #00BCD4 0%, #00ACC1 100%);
+            background: linear-gradient(135deg, rgba(0, 188, 212, 0.95) 0%, rgba(0, 172, 193, 0.95) 100%);
+        }
+
+        .notification.info::before {
+            background: #00BCD4;
+        }
+
+        .notification-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .notification-text {
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        @keyframes notificationExit {
+            from {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .notification.exit {
+            animation: notificationExit 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
         }
 
         /* Responsive */
@@ -733,6 +797,216 @@
             .history-thumb {
                 width: 100px;
                 height: 56px;
+            }
+        }
+
+        /* Browser Detection Loading Screen - Cloudflare Style */
+        .browser-check-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #FFFFFF;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .browser-check-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .browser-check-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .cloudflare-logo {
+            margin-bottom: 40px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .cloudflare-logo svg {
+            filter: drop-shadow(0 8px 20px rgba(243, 128, 32, 0.4));
+        }
+
+        .browser-check-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .browser-check-message {
+            font-size: 18px;
+            color: #666666;
+            margin-bottom: 40px;
+        }
+
+        .checking-animation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            min-height: 50px;
+        }
+
+        .checking-text {
+            font-size: 16px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        /* Cloudflare-style spinner */
+        .cloudflare-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f0f0f0;
+            border-top: 5px solid #f38020;
+            border-right: 5px solid #f38020;
+            border-radius: 50%;
+            animation: cloudflareRotate 1s linear infinite;
+        }
+
+        @keyframes cloudflareRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Old dot pulse - keep as backup */
+        .dot-pulse {
+            display: none;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #00BCD4;
+            border-radius: 50%;
+            animation: dotPulse 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.3;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #F5F5F5;
+            border-radius: 6px;
+            margin-bottom: 24px;
+        }
+
+        .security-badge svg {
+            color: #4CAF50;
+        }
+
+        .security-text {
+            font-size: 14px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .browser-info-box {
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 32px;
+        }
+
+        .browser-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .browser-info-label {
+            color: #666666;
+        }
+
+        .browser-info-value {
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .cloudflare-footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .cloudflare-footer-text {
+            font-size: 12px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .spinner-circle {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #F0F0F0;
+            border-top-color: #00BCD4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .browser-check-title {
+                font-size: 24px;
+            }
+
+            .browser-check-message {
+                font-size: 16px;
             }
         }
 
@@ -824,6 +1098,69 @@
     </style>
 </head>
 <body>
+    <!-- Browser Check Loading Screen - Cloudflare Style -->
+    <div class="browser-check-overlay" id="browserCheckOverlay">
+        <div class="browser-check-content">
+            <div class="cloudflare-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 512 512" style="filter: drop-shadow(0 4px 12px rgba(243, 128, 32, 0.3));">
+                    <rect width="512" height="512" rx="15%" fill="#ffffff"/>
+                    <path fill="#f38020" d="M331 326c11-26-4-38-19-38l-148-2c-4 0-4-6 1-7l150-2c17-1 37-15 43-33 0 0 10-21 9-24a97 97 0 0 0-187-11c-38-25-78 9-69 46-48 3-65 46-60 72 0 1 1 2 3 2h274c1 0 3-1 3-3z"/>
+                    <path fill="#faae40" d="M381 224c-4 0-6-1-7 1l-5 21c-5 16 3 30 20 31l32 2c4 0 4 6-1 7l-33 1c-36 4-46 39-46 39 0 2 0 3 2 3h113l3-2a81 81 0 0 0-78-103"/>
+                </svg>
+            </div>
+            
+            <h1 class="browser-check-title">Checking your browser before accessing DownAnyL</h1>
+            <p class="browser-check-message">This process is automatic. Your browser will redirect to your requested content shortly.</p>
+            
+            <div class="checking-animation">
+                <div class="cloudflare-spinner"></div>
+                <span class="checking-text">Checking if the site connection is secure</span>
+            </div>
+            
+            <div style="max-width: 400px; margin: 0 auto 32px;">
+                <div style="width: 100%; height: 3px; background: #e0e0e0; border-radius: 2px; overflow: hidden;">
+                    <div id="progressBar" style="height: 100%; background: linear-gradient(90deg, #f38020, #faae40); width: 0%; transition: width 0.3s ease;"></div>
+                </div>
+            </div>
+            
+            <div class="security-badge" id="securityBadge" style="opacity: 0; transition: opacity 0.5s ease;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#4CAF50"/>
+                    <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="white"/>
+                </svg>
+                <span class="security-text">Connection is secure</span>
+            </div>
+            
+            <div class="browser-info-box" id="browserInfoBox" style="opacity: 0; transition: opacity 0.5s ease;">
+                <div class="browser-info-row">
+                    <span class="browser-info-label">Browser:</span>
+                    <span class="browser-info-value" id="detectedBrowser">Detecting...</span>
+                </div>
+                <div class="browser-info-row">
+                    <span class="browser-info-label">Operating System:</span>
+                    <span class="browser-info-value" id="detectedOS">Detecting...</span>
+                </div>
+                <div class="browser-info-row">
+                    <span class="browser-info-label">User Agent:</span>
+                    <span class="browser-info-value" id="detectedUA" style="font-size: 11px; word-break: break-all;">Detecting...</span>
+                </div>
+            </div>
+            
+            <div class="cloudflare-footer">
+                <div class="cloudflare-footer-text">
+                    <svg width="16" height="16" viewBox="0 0 512 512">
+                        <rect width="512" height="512" rx="15%" fill="#f38020"/>
+                        <path fill="#ffffff" d="M331 326c11-26-4-38-19-38l-148-2c-4 0-4-6 1-7l150-2c17-1 37-15 43-33 0 0 10-21 9-24a97 97 0 0 0-187-11c-38-25-78 9-69 46-48 3-65 46-60 72 0 1 1 2 3 2h274c1 0 3-1 3-3z"/>
+                    </svg>
+                    <span>Performance & security by DownAnyL</span>
+                </div>
+                <div style="margin-top: 12px; font-size: 11px; color: #999999;">
+                    <span id="rayIdDisplay">Initializing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Download Page -->
     <div class="page active" id="downloadPage">
         <div class="container">
@@ -920,6 +1257,9 @@
                     </div>
                 </div>
                 <p class="creator-credit">BY RIKKIUU</p>
+                <div class="browser-info" id="browserInfo" style="text-align: center; margin-top: 12px; font-size: 11px; color: #5A6270; opacity: 0.6;">
+                    <span id="browserDetection">Detecting browser...</span>
+                </div>
             </div>
 
             <div class="loading-container" id="loadingContainer">
@@ -1021,178 +1361,277 @@
 
     <script>
         // ==========================================
+        // BROWSER DETECTION WITH LOADING SCREEN
+        // ==========================================
+        
+        function detectBrowser() {
+            const userAgent = navigator.userAgent;
+            let browserName = "Unknown Browser";
+            let browserIcon = "🌐";
+            
+            if (userAgent.indexOf("Firefox") > -1) {
+                browserName = "Mozilla Firefox";
+                browserIcon = "🦊";
+            } else if (userAgent.indexOf("SamsungBrowser") > -1) {
+                browserName = "Samsung Internet";
+                browserIcon = "📱";
+            } else if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
+                browserName = "Opera";
+                browserIcon = "🎭";
+            } else if (userAgent.indexOf("Trident") > -1) {
+                browserName = "Internet Explorer";
+                browserIcon = "⚠️";
+            } else if (userAgent.indexOf("Edge") > -1 || userAgent.indexOf("Edg") > -1) {
+                browserName = "Microsoft Edge";
+                browserIcon = "🔷";
+            } else if (userAgent.indexOf("Chrome") > -1) {
+                browserName = "Google Chrome";
+                browserIcon = "🔵";
+            } else if (userAgent.indexOf("Safari") > -1) {
+                browserName = "Safari";
+                browserIcon = "🧭";
+            }
+            
+            // Detect OS
+            let os = "Unknown OS";
+            if (userAgent.indexOf("Win") > -1) os = "Windows";
+            else if (userAgent.indexOf("Mac") > -1) os = "macOS";
+            else if (userAgent.indexOf("Linux") > -1) os = "Linux";
+            else if (userAgent.indexOf("Android") > -1) os = "Android";
+            else if (userAgent.indexOf("iOS") > -1 || userAgent.indexOf("iPhone") > -1 || userAgent.indexOf("iPad") > -1) os = "iOS";
+            
+            return { browserName, browserIcon, os };
+        }
+
+        // Animate browser check loading screen - Cloudflare Style (Realistic)
+        function animateBrowserCheck() {
+            const overlay = document.getElementById('browserCheckOverlay');
+            const securityBadge = document.getElementById('securityBadge');
+            const browserInfoBox = document.getElementById('browserInfoBox');
+            const detectedBrowser = document.getElementById('detectedBrowser');
+            const detectedOS = document.getElementById('detectedOS');
+            const detectedUA = document.getElementById('detectedUA');
+            const browserDetectionFooter = document.getElementById('browserDetection');
+            const checkingText = document.querySelector('.checking-text');
+            const rayIdDisplay = document.getElementById('rayIdDisplay');
+            const spinner = document.querySelector('.cloudflare-spinner');
+            const progressBar = document.getElementById('progressBar');
+            
+            const browser = detectBrowser();
+            const userAgent = navigator.userAgent;
+            
+            // Generate fake Ray ID (Cloudflare-style)
+            const rayId = Math.random().toString(36).substring(2, 15).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+            
+            // Show Ray ID immediately
+            if (rayIdDisplay) {
+                rayIdDisplay.textContent = `Ray ID: ${rayId} • ${new Date().getFullYear()}`;
+            }
+            
+            // Update footer info
+            if (browserDetectionFooter) {
+                browserDetectionFooter.textContent = `${browser.browserIcon} ${browser.browserName} • ${browser.os}`;
+            }
+            
+            // Realistic checking phases with random delays
+            const phases = [
+                'Checking if the site connection is secure',
+                'Verifying you are human',
+                'Checking the browser',
+                'Creating a secure connection',
+                'Verifying the integrity'
+            ];
+            
+            let currentPhase = 0;
+            let progressValue = 0;
+            
+            // Animate progress bar smoothly
+            const progressInterval = setInterval(() => {
+                if (progressValue < 90) {
+                    progressValue += Math.random() * 8 + 2; // Random increment 2-10%
+                    if (progressValue > 90) progressValue = 90;
+                    if (progressBar) {
+                        progressBar.style.width = progressValue + '%';
+                    }
+                }
+            }, 300);
+            
+            // Animate through phases
+            const phaseInterval = setInterval(() => {
+                if (currentPhase < phases.length) {
+                    checkingText.textContent = phases[currentPhase];
+                    currentPhase++;
+                } else {
+                    clearInterval(phaseInterval);
+                }
+            }, 650); // Change phase every 650ms
+            
+            // Step 1: Show browser info (random delay 1.2-1.8s)
+            const step1Delay = 1200 + Math.random() * 600;
+            setTimeout(() => {
+                detectedBrowser.textContent = `${browser.browserIcon} ${browser.browserName}`;
+                detectedOS.textContent = browser.os;
+                detectedUA.textContent = userAgent.substring(0, 80) + '...';
+                browserInfoBox.style.opacity = '1';
+            }, step1Delay);
+            
+            // Step 2: Show security badge (random delay 2.3-2.8s)
+            const step2Delay = 2300 + Math.random() * 500;
+            setTimeout(() => {
+                // Complete progress bar
+                clearInterval(progressInterval);
+                if (progressBar) {
+                    progressBar.style.width = '100%';
+                }
+                
+                // Hide spinner and show success
+                if (spinner) {
+                    spinner.style.display = 'none';
+                }
+                
+                // Show checkmark
+                const checkmark = document.createElement('div');
+                checkmark.innerHTML = `
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" style="animation: checkmarkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <circle cx="12" cy="12" r="11" fill="#4CAF50"/>
+                        <path d="M7 12l3 3 7-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                
+                // Add checkmark animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes checkmarkPop {
+                        0% { transform: scale(0); opacity: 0; }
+                        50% { transform: scale(1.2); }
+                        100% { transform: scale(1); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                document.querySelector('.checking-animation').prepend(checkmark);
+                
+                securityBadge.style.opacity = '1';
+                checkingText.textContent = 'Success! Proceeding to DownAnyL';
+            }, step2Delay);
+            
+            // Step 3: Hide overlay and show app (random delay 3.5-4.2s)
+            const step3Delay = 3500 + Math.random() * 700;
+            setTimeout(() => {
+                clearInterval(phaseInterval);
+                overlay.classList.add('hidden');
+                
+                // Remove overlay from DOM after transition
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 500);
+                
+                // Show welcome notification with Ray ID
+                setTimeout(() => {
+                    showNotification(`${browser.browserIcon} Access granted • Ray ID: ${rayId.substring(0, 12)}...`, 'success');
+                }, 300);
+                
+                // Warn if unsupported browser
+                if (browser.browserName === "Internet Explorer") {
+                    setTimeout(() => {
+                        showNotification('⚠️ Warning: Please upgrade to a modern browser', 'error');
+                    }, 1500);
+                }
+            }, step3Delay);
+        }
+
+        // Start browser check on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            animateBrowserCheck();
+        });
+
+        // ==========================================
         // NOTIFICATION SYSTEM (MUST BE FIRST!)
         // ==========================================
         
         function showNotification(message, type = 'info') {
+            // Icon mapping
+            const icons = {
+                success: '✓',
+                error: '✕',
+                info: 'ℹ'
+            };
+            
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
-            notification.textContent = message;
+            
+            // Create icon element
+            const iconElement = document.createElement('div');
+            iconElement.className = 'notification-icon';
+            iconElement.textContent = icons[type] || 'ℹ';
+            
+            // Create text element
+            const textElement = document.createElement('div');
+            textElement.className = 'notification-text';
+            textElement.textContent = message;
+            
+            notification.appendChild(iconElement);
+            notification.appendChild(textElement);
+            
             document.body.appendChild(notification);
-
+            
+            // Calculate position after appending to get accurate height
             setTimeout(() => {
-                notification.style.animation = 'notificationSlide 0.3s ease-out reverse';
+                const existingNotifications = document.querySelectorAll('.notification:not(.exit)');
+                let topOffset = 20;
+                
+                existingNotifications.forEach((notif, index) => {
+                    if (notif !== notification) {
+                        const rect = notif.getBoundingClientRect();
+                        if (rect.height > 0) {
+                            topOffset += rect.height + 12;
+                        }
+                    }
+                });
+                
+                notification.style.top = topOffset + 'px';
+            }, 10);
+
+            // Click to dismiss
+            const dismissNotification = () => {
+                if (notification.classList.contains('exit')) return; // Prevent double dismiss
+                
+                notification.classList.add('exit');
+                
+                // Clear auto-remove timeout if exists
+                if (notification.autoRemoveTimeout) {
+                    clearTimeout(notification.autoRemoveTimeout);
+                }
+                
                 setTimeout(() => {
                     if (document.body.contains(notification)) {
                         document.body.removeChild(notification);
+                        // Reposition remaining notifications
+                        repositionNotifications();
                     }
                 }, 300);
-            }, 3000);
+            };
+
+            notification.addEventListener('click', dismissNotification);
+
+            // Auto remove after 4 seconds with smooth exit
+            notification.autoRemoveTimeout = setTimeout(dismissNotification, 4000);
         }
 
-        // ==========================================
-        // ANTI-INSPECT PROTECTION - ENHANCED
-        // ==========================================
-        
-        // Disable right-click
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            setTimeout(() => showNotification('Right-click is disabled', 'error'), 0);
-            return false;
-        }, false);
-
-        // Disable keyboard shortcuts
-        document.onkeydown = function(e) {
-            // F12
-            if (e.keyCode == 123) {
-                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
-                return false;
-            }
+        // Reposition all notifications smoothly
+        function repositionNotifications() {
+            const notifications = document.querySelectorAll('.notification:not(.exit)');
+            let topOffset = 20;
             
-            // Ctrl+Shift+I
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
-                return false;
-            }
-            
-            // Ctrl+Shift+J
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
-                return false;
-            }
-            
-            // Ctrl+Shift+C
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                setTimeout(() => showNotification('Inspect element is disabled', 'error'), 0);
-                return false;
-            }
-            
-            // Ctrl+U
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                setTimeout(() => showNotification('View source is disabled', 'error'), 0);
-                return false;
-            }
-            
-            // Ctrl+S
-            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
-                setTimeout(() => showNotification('Save page is disabled', 'error'), 0);
-                return false;
-            }
-        };
-
-        // Advanced DevTools Detection
-        let devtoolsOpen = false;
-        
-        // Size-based detection - lebih toleran
-        (function() {
-            const detectDevTools = function() {
-                const widthThreshold = window.outerWidth - window.innerWidth > 200; // Increased from 160
-                const heightThreshold = window.outerHeight - window.innerHeight > 200; // Increased from 160
+            notifications.forEach(notif => {
+                notif.style.transition = 'top 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                notif.style.top = topOffset + 'px';
                 
-                if (widthThreshold && heightThreshold) { // Both must be true
-                    devtoolsOpen = true;
-                    blockPage();
+                const rect = notif.getBoundingClientRect();
+                if (rect.height > 0) {
+                    topOffset += rect.height + 12;
                 }
-            };
-            
-            setInterval(detectDevTools, 2000); // Check less frequently
-        })();
-
-        function blockPage() {
-            if (devtoolsOpen) {
-                document.body.innerHTML = `
-                    <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0F1419;color:#fff;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;text-align:center;padding:20px;">
-                        <div>
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#FF5252" style="margin-bottom:20px;">
-                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                                <path d="M15 9l-6 6M9 9l6 6" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            <h1 style="font-size:32px;margin-bottom:16px;color:#FF5252;">⚠️ Access Denied</h1>
-                            <p style="font-size:18px;color:#8B95A1;margin-bottom:12px;">Developer Tools Detected!</p>
-                            <p style="font-size:14px;color:#5A6270;">Please close developer tools and refresh the page.</p>
-                            <p style="font-size:12px;color:#5A6270;margin-top:20px;">Protected by DownAnyL Security</p>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        // Console detection - simplified
-        (function() {
-            let checkCount = 0;
-            const devtools = {
-                isOpen: false,
-                orientation: undefined
-            };
-
-            const threshold = 200; // Increased threshold
-
-            const emitEvent = (isOpen, orientation) => {
-                checkCount++;
-                // Only trigger after multiple detections
-                if (isOpen && checkCount > 3) {
-                    devtools.isOpen = isOpen;
-                    devtools.orientation = orientation;
-                    devtoolsOpen = true;
-                    blockPage();
-                } else if (!isOpen) {
-                    checkCount = 0;
-                }
-            };
-
-            setInterval(() => {
-                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-                const orientation = widthThreshold ? 'vertical' : 'horizontal';
-
-                if (widthThreshold && heightThreshold) {
-                    emitEvent(true, orientation);
-                } else {
-                    emitEvent(false, undefined);
-                }
-            }, 2000); // Check less frequently
-        })();
-
-        // Disable select and copy
-        document.addEventListener('selectstart', function(e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        document.addEventListener('copy', function(e) {
-            const selection = window.getSelection().toString();
-            const target = e.target;
-            
-            // Allow copy in input and textarea
-            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
-                return true;
-            }
-            
-            // Block copying large text
-            if (selection.length > 50) {
-                e.preventDefault();
-                setTimeout(() => showNotification('Copying large text is disabled', 'error'), 0);
-                return false;
-            }
-        });
-
-        // Clear console continuously
-        if (window.console) {
-            setInterval(function() {
-                console.clear();
-            }, 100);
+            });
         }
 
         // ==========================================
@@ -1371,7 +1810,9 @@
                     })
                 });
 
-                if (!response.ok) throw new Error('API request failed');
+                if (!response.ok) {
+                    throw new Error(`API responded with status ${response.status}`);
+                }
                 
                 const data = await response.json();
                 
@@ -1391,11 +1832,13 @@
                     thumbnail: data.thumb || placeholderThumbnail,
                     size: 'Unknown',
                     platform: platform,
-                    downloadUrl: data.url,
+                    downloadUrl: data.url || null,
                     originalUrl: url,
                     timestamp: new Date().toISOString()
                 };
             } catch (error) {
+                console.error('Fetch video info error:', error);
+                
                 // Better placeholder for failed API calls
                 const placeholderThumbnail = `data:image/svg+xml;base64,${btoa(`
                     <svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1643,18 +2086,6 @@
             } catch (_) {
                 return false;
             }
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.animation = 'notificationSlide 0.3s ease-out reverse';
-                setTimeout(() => document.body.removeChild(notification), 300);
-            }, 3000);
         }
 
         // Initialize
