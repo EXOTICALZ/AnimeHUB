@@ -735,6 +735,104 @@
                 height: 56px;
             }
         }
+
+        /* Cookie Warning */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1A1F28 0%, #232931 100%);
+            padding: 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 2px solid #00BCD4;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .cookie-text h3 {
+            color: #00BCD4;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .cookie-text p {
+            color: #8B95A1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cookie-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cookie-accept {
+            background: linear-gradient(135deg, #00BCD4 0%, #00ACC1 100%);
+            color: #FFFFFF;
+        }
+
+        .cookie-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+        }
+
+        .cookie-decline {
+            background-color: transparent;
+            border: 2px solid #2C3441;
+            color: #8B95A1;
+        }
+
+        .cookie-decline:hover {
+            border-color: #00BCD4;
+            color: #00BCD4;
+        }
+
+        @media (max-width: 768px) {
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .cookie-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -914,7 +1012,129 @@
         </div>
     </nav>
 
+    <!-- Cookie Warning Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h3>🍪 We Use Cookies</h3>
+                <p>We use cookies to enhance your experience and save your download history locally. By using DownAnyL, you agree to our use of cookies.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-accept" id="acceptCookies">Accept All</button>
+                <button class="cookie-btn cookie-decline" id="declineCookies">Decline</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ==========================================
+        // ANTI-INSPECT PROTECTION
+        // ==========================================
+        
+        // Disable right-click
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showNotification('Right-click is disabled', 'error');
+            return false;
+        });
+
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                showNotification('Developer tools are disabled', 'error');
+                return false;
+            }
+            
+            // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                showNotification('Developer tools are disabled', 'error');
+                return false;
+            }
+            
+            // Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+                e.preventDefault();
+                showNotification('Developer tools are disabled', 'error');
+                return false;
+            }
+            
+            // Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                showNotification('View source is disabled', 'error');
+                return false;
+            }
+            
+            // Ctrl+Shift+C (inspect element)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                showNotification('Inspect element is disabled', 'error');
+                return false;
+            }
+        });
+
+        // Detect DevTools
+        const devtoolsDetector = () => {
+            const threshold = 160;
+            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+            
+            if (widthThreshold || heightThreshold) {
+                document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0F1419;color:#fff;font-family:Arial;text-align:center;"><div><h1>⚠️ Developer Tools Detected</h1><p>Please close developer tools to continue using DownAnyL</p></div></div>';
+            }
+        };
+
+        // Check every 1 second
+        setInterval(devtoolsDetector, 1000);
+
+        // Disable text selection (optional)
+        document.addEventListener('selectstart', (e) => {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                // e.preventDefault(); // Uncomment to fully disable text selection
+            }
+        });
+
+        // ==========================================
+        // COOKIE WARNING LOGIC
+        // ==========================================
+        
+        const cookieBanner = document.getElementById('cookieBanner');
+        const acceptCookiesBtn = document.getElementById('acceptCookies');
+        const declineCookiesBtn = document.getElementById('declineCookies');
+
+        // Check if user already accepted/declined cookies
+        const cookieConsent = localStorage.getItem('cookieConsent');
+        
+        if (!cookieConsent) {
+            // Show cookie banner after 1 second
+            setTimeout(() => {
+                cookieBanner.classList.add('show');
+            }, 1000);
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.classList.remove('show');
+            showNotification('Cookies accepted. Thank you!', 'success');
+        });
+
+        declineCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            cookieBanner.classList.remove('show');
+            showNotification('Cookies declined. Some features may be limited.', 'info');
+            
+            // Clear any stored data if declined
+            localStorage.removeItem('downloadHistory');
+            downloadHistory = [];
+        });
+
+        // ==========================================
+        // ORIGINAL APPLICATION CODE
+        // ==========================================
+        
         // DOM Elements
         const videoUrlInput = document.getElementById('videoUrl');
         const findBtn = document.getElementById('findBtn');
