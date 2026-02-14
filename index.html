@@ -770,18 +770,6 @@
             min-width: 250px;
         }
 
-        .cookie-text h3 {
-            color: #00BCD4;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .cookie-text p {
-            color: #8B95A1;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
         .cookie-buttons {
             display: flex;
             gap: 12px;
@@ -1016,8 +1004,13 @@
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
             <div class="cookie-text">
-                <h3>🍪 We Use Cookies</h3>
-                <p>We use cookies to enhance your experience and save your download history locally. By using DownAnyL, you agree to our use of cookies.</p>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C16.1421 4.5 19.5 7.85786 19.5 12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM11.25 13.5V8.25H12.75V13.5H11.25ZM11.25 15.75V14.25H12.75V15.75H11.25Z" fill="#00BCD4"/>
+                    </svg>
+                    <h3 style="color: #00BCD4; font-size: 16px; margin: 0;">We Use Cookies</h3>
+                </div>
+                <p style="color: #8B95A1; font-size: 14px; line-height: 1.5; margin: 0;">We use cookies to enhance your experience and save your download history locally. By using DownAnyL, you agree to our use of cookies.</p>
             </div>
             <div class="cookie-buttons">
                 <button class="cookie-btn cookie-accept" id="acceptCookies">Accept All</button>
@@ -1028,74 +1021,220 @@
 
     <script>
         // ==========================================
-        // ANTI-INSPECT PROTECTION
+        // NOTIFICATION SYSTEM (MUST BE FIRST!)
+        // ==========================================
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'notificationSlide 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // ==========================================
+        // ANTI-INSPECT PROTECTION - ENHANCED
         // ==========================================
         
         // Disable right-click
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
-            showNotification('Right-click is disabled', 'error');
+            setTimeout(() => showNotification('Right-click is disabled', 'error'), 0);
             return false;
-        });
+        }, false);
 
-        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-        document.addEventListener('keydown', (e) => {
+        // Disable keyboard shortcuts
+        document.onkeydown = function(e) {
             // F12
-            if (e.keyCode === 123) {
-                e.preventDefault();
-                showNotification('Developer tools are disabled', 'error');
+            if (e.keyCode == 123) {
+                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
                 return false;
             }
             
             // Ctrl+Shift+I
-            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-                e.preventDefault();
-                showNotification('Developer tools are disabled', 'error');
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
                 return false;
             }
             
             // Ctrl+Shift+J
-            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-                e.preventDefault();
-                showNotification('Developer tools are disabled', 'error');
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                setTimeout(() => showNotification('Developer tools are disabled', 'error'), 0);
                 return false;
             }
             
-            // Ctrl+U (view source)
-            if (e.ctrlKey && e.keyCode === 85) {
-                e.preventDefault();
-                showNotification('View source is disabled', 'error');
+            // Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                setTimeout(() => showNotification('Inspect element is disabled', 'error'), 0);
                 return false;
             }
             
-            // Ctrl+Shift+C (inspect element)
-            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-                e.preventDefault();
-                showNotification('Inspect element is disabled', 'error');
+            // Ctrl+U
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                setTimeout(() => showNotification('View source is disabled', 'error'), 0);
                 return false;
             }
-        });
-
-        // Detect DevTools
-        const devtoolsDetector = () => {
-            const threshold = 160;
-            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
             
-            if (widthThreshold || heightThreshold) {
-                document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0F1419;color:#fff;font-family:Arial;text-align:center;"><div><h1>⚠️ Developer Tools Detected</h1><p>Please close developer tools to continue using DownAnyL</p></div></div>';
+            // Ctrl+S
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+                setTimeout(() => showNotification('Save page is disabled', 'error'), 0);
+                return false;
             }
         };
 
-        // Check every 1 second
-        setInterval(devtoolsDetector, 1000);
-
-        // Disable text selection (optional)
-        document.addEventListener('selectstart', (e) => {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                // e.preventDefault(); // Uncomment to fully disable text selection
+        // Advanced DevTools Detection
+        let devtoolsOpen = false;
+        const element = new Image();
+        
+        Object.defineProperty(element, 'id', {
+            get: function() {
+                devtoolsOpen = true;
+                blockPage();
             }
         });
+
+        function blockPage() {
+            if (devtoolsOpen) {
+                document.body.innerHTML = `
+                    <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0F1419;color:#fff;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;text-align:center;padding:20px;">
+                        <div>
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#FF5252" style="margin-bottom:20px;">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                <path d="M15 9l-6 6M9 9l6 6" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <h1 style="font-size:32px;margin-bottom:16px;color:#FF5252;">⚠️ Access Denied</h1>
+                            <p style="font-size:18px;color:#8B95A1;margin-bottom:12px;">Developer Tools Detected!</p>
+                            <p style="font-size:14px;color:#5A6270;">Please close developer tools and refresh the page.</p>
+                            <p style="font-size:12px;color:#5A6270;margin-top:20px;">Protected by DownAnyL Security</p>
+                        </div>
+                    </div>
+                `;
+                throw new Error('DevTools detected');
+            }
+        }
+
+        setInterval(function() {
+            console.log(element);
+            console.clear();
+        }, 1000);
+
+        // Size-based detection
+        (function() {
+            const detectDevTools = function() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+                
+                if (widthThreshold || heightThreshold) {
+                    devtoolsOpen = true;
+                    blockPage();
+                }
+            };
+            
+            setInterval(detectDevTools, 500);
+        })();
+
+        // Console detection
+        (function() {
+            const devtools = {
+                isOpen: false,
+                orientation: undefined
+            };
+
+            const threshold = 160;
+
+            const emitEvent = (isOpen, orientation) => {
+                if (devtools.isOpen !== isOpen || devtools.orientation !== orientation) {
+                    devtools.isOpen = isOpen;
+                    devtools.orientation = orientation;
+                    
+                    if (isOpen) {
+                        devtoolsOpen = true;
+                        blockPage();
+                    }
+                }
+            };
+
+            setInterval(() => {
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+                if (!(heightThreshold && widthThreshold) && ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)) {
+                    emitEvent(true, orientation);
+                } else {
+                    emitEvent(false, undefined);
+                }
+            }, 500);
+        })();
+
+        // Debugger trap
+        (function() {
+            function debuggerCheck() {
+                const before = new Date();
+                debugger;
+                const after = new Date();
+                
+                if (after - before > 100) {
+                    devtoolsOpen = true;
+                    blockPage();
+                }
+            }
+            
+            setInterval(debuggerCheck, 1000);
+        })();
+
+        // Override console methods
+        (function() {
+            const methods = ['log', 'debug', 'info', 'warn', 'error', 'table', 'trace', 'dir', 'dirxml', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
+            
+            methods.forEach(method => {
+                const original = console[method];
+                console[method] = function() {
+                    devtoolsOpen = true;
+                    blockPage();
+                };
+            });
+        })();
+
+        // Disable select and copy
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        document.addEventListener('copy', function(e) {
+            const selection = window.getSelection().toString();
+            const target = e.target;
+            
+            // Allow copy in input and textarea
+            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+                return true;
+            }
+            
+            // Block copying large text
+            if (selection.length > 50) {
+                e.preventDefault();
+                setTimeout(() => showNotification('Copying large text is disabled', 'error'), 0);
+                return false;
+            }
+        });
+
+        // Clear console continuously
+        if (window.console) {
+            setInterval(function() {
+                console.clear();
+            }, 100);
+        }
 
         // ==========================================
         // COOKIE WARNING LOGIC
@@ -1302,26 +1441,109 @@
         }
 
         async function downloadVideo(videoData, quality) {
-            if (videoData.downloadUrl) {
-                const a = document.createElement('a');
-                a.href = videoData.downloadUrl;
-                a.download = videoData.title + '.mp4';
-                a.target = '_blank';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            } else {
+            const url = videoData.originalUrl;
+            const platform = videoData.platform;
+            
+            // Try multiple download methods
+            try {
+                // Method 1: Try Cobalt API first
+                showNotification('Preparing download...', 'info');
+                
+                const cobaltResponse = await fetch('https://api.cobalt.tools/api/json', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: url,
+                        vQuality: quality,
+                        filenamePattern: 'basic',
+                        isAudioOnly: false
+                    })
+                });
+
+                if (cobaltResponse.ok) {
+                    const data = await cobaltResponse.json();
+                    
+                    if (data.status === 'redirect' || data.url) {
+                        // Direct download available
+                        const downloadUrl = data.url;
+                        const a = document.createElement('a');
+                        a.href = downloadUrl;
+                        a.download = `${videoData.title}.mp4`;
+                        a.target = '_blank';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        showNotification('Download started!', 'success');
+                        return;
+                    }
+                }
+                
+                // Method 2: Try alternative APIs based on platform
+                if (platform === 'TikTok') {
+                    // Try TikTok downloader API
+                    try {
+                        const tiktokAPI = await fetch(`https://api.tiklydown.eu.org/api/download?url=${encodeURIComponent(url)}`);
+                        const tiktokData = await tiktokAPI.json();
+                        
+                        if (tiktokData.video && tiktokData.video.noWatermark) {
+                            window.open(tiktokData.video.noWatermark, '_blank');
+                            showNotification('Opening TikTok video...', 'success');
+                            return;
+                        }
+                    } catch (e) {
+                        console.log('TikTok API failed:', e);
+                    }
+                }
+                
+                if (platform === 'Instagram') {
+                    // Try Instagram downloader
+                    try {
+                        const instaAPI = await fetch(`https://api.downloadgram.org/media?url=${encodeURIComponent(url)}`);
+                        const instaData = await instaAPI.json();
+                        
+                        if (instaData.url) {
+                            window.open(instaData.url, '_blank');
+                            showNotification('Opening Instagram video...', 'success');
+                            return;
+                        }
+                    } catch (e) {
+                        console.log('Instagram API failed:', e);
+                    }
+                }
+                
+                // Method 3: Fallback to third-party download services
                 const services = {
-                    'YouTube': `https://y2mate.com/youtube/${extractYouTubeId(videoData.originalUrl)}`,
+                    'YouTube': `https://yt5s.io/en/youtube-to-mp4/${extractYouTubeId(url)}`,
                     'TikTok': `https://snaptik.app/`,
                     'Instagram': `https://saveinsta.app/`,
                     'Twitter': `https://twittervideodownloader.com/`,
-                    'Facebook': `https://fdown.net/`
+                    'Facebook': `https://fdown.net/`,
+                    'Vimeo': `https://vimeo-downloader.com/`,
+                    'Reddit': `https://viddit.red/`
                 };
 
-                const serviceUrl = services[videoData.platform] || 'https://cobalt.tools/';
+                const serviceUrl = services[platform] || 'https://cobalt.tools/';
                 window.open(serviceUrl, '_blank');
                 showNotification('Opening download service...', 'info');
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                showNotification('Download failed. Opening alternative service...', 'error');
+                
+                // Final fallback
+                const fallbackServices = {
+                    'YouTube': 'https://y2mate.com',
+                    'TikTok': 'https://snaptik.app/',
+                    'Instagram': 'https://saveinsta.app/',
+                    'Twitter': 'https://twittervideodownloader.com/',
+                    'Facebook': 'https://fdown.net/'
+                };
+                
+                const fallbackUrl = fallbackServices[platform] || 'https://cobalt.tools/';
+                window.open(fallbackUrl, '_blank');
             }
         }
 
