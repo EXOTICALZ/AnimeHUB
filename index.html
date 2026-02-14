@@ -1092,14 +1092,21 @@
 
         // Advanced DevTools Detection
         let devtoolsOpen = false;
-        const element = new Image();
         
-        Object.defineProperty(element, 'id', {
-            get: function() {
-                devtoolsOpen = true;
-                blockPage();
-            }
-        });
+        // Size-based detection - lebih toleran
+        (function() {
+            const detectDevTools = function() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 200; // Increased from 160
+                const heightThreshold = window.outerHeight - window.innerHeight > 200; // Increased from 160
+                
+                if (widthThreshold && heightThreshold) { // Both must be true
+                    devtoolsOpen = true;
+                    blockPage();
+                }
+            };
+            
+            setInterval(detectDevTools, 2000); // Check less frequently
+        })();
 
         function blockPage() {
             if (devtoolsOpen) {
@@ -1117,48 +1124,29 @@
                         </div>
                     </div>
                 `;
-                throw new Error('DevTools detected');
             }
         }
 
-        setInterval(function() {
-            console.log(element);
-            console.clear();
-        }, 1000);
-
-        // Size-based detection
+        // Console detection - simplified
         (function() {
-            const detectDevTools = function() {
-                const widthThreshold = window.outerWidth - window.innerWidth > 160;
-                const heightThreshold = window.outerHeight - window.innerHeight > 160;
-                
-                if (widthThreshold || heightThreshold) {
-                    devtoolsOpen = true;
-                    blockPage();
-                }
-            };
-            
-            setInterval(detectDevTools, 500);
-        })();
-
-        // Console detection
-        (function() {
+            let checkCount = 0;
             const devtools = {
                 isOpen: false,
                 orientation: undefined
             };
 
-            const threshold = 160;
+            const threshold = 200; // Increased threshold
 
             const emitEvent = (isOpen, orientation) => {
-                if (devtools.isOpen !== isOpen || devtools.orientation !== orientation) {
+                checkCount++;
+                // Only trigger after multiple detections
+                if (isOpen && checkCount > 3) {
                     devtools.isOpen = isOpen;
                     devtools.orientation = orientation;
-                    
-                    if (isOpen) {
-                        devtoolsOpen = true;
-                        blockPage();
-                    }
+                    devtoolsOpen = true;
+                    blockPage();
+                } else if (!isOpen) {
+                    checkCount = 0;
                 }
             };
 
@@ -1167,41 +1155,12 @@
                 const heightThreshold = window.outerHeight - window.innerHeight > threshold;
                 const orientation = widthThreshold ? 'vertical' : 'horizontal';
 
-                if (!(heightThreshold && widthThreshold) && ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)) {
+                if (widthThreshold && heightThreshold) {
                     emitEvent(true, orientation);
                 } else {
                     emitEvent(false, undefined);
                 }
-            }, 500);
-        })();
-
-        // Debugger trap
-        (function() {
-            function debuggerCheck() {
-                const before = new Date();
-                debugger;
-                const after = new Date();
-                
-                if (after - before > 100) {
-                    devtoolsOpen = true;
-                    blockPage();
-                }
-            }
-            
-            setInterval(debuggerCheck, 1000);
-        })();
-
-        // Override console methods
-        (function() {
-            const methods = ['log', 'debug', 'info', 'warn', 'error', 'table', 'trace', 'dir', 'dirxml', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
-            
-            methods.forEach(method => {
-                const original = console[method];
-                console[method] = function() {
-                    devtoolsOpen = true;
-                    blockPage();
-                };
-            });
+            }, 2000); // Check less frequently
         })();
 
         // Disable select and copy
@@ -1416,10 +1375,20 @@
                 
                 const data = await response.json();
                 
+                // Generate better placeholder thumbnail
+                const placeholderThumbnail = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="640" height="360" fill="#1A1F28"/>
+                        <circle cx="320" cy="160" r="40" stroke="#00BCD4" stroke-width="4" fill="none"/>
+                        <path d="M310 150 L310 170 L330 160 Z" fill="#00BCD4"/>
+                        <text x="320" y="220" font-family="Arial" font-size="20" fill="#8B95A1" text-anchor="middle">${platform} Video</text>
+                    </svg>
+                `)}`;
+                
                 return {
                     title: extractTitle(url, platform),
-                    duration: 'Unknown',
-                    thumbnail: data.thumb || 'https://via.placeholder.com/640x360/0F1419/00BCD4?text=Video',
+                    duration: data.duration || 'Unknown',
+                    thumbnail: data.thumb || placeholderThumbnail,
                     size: 'Unknown',
                     platform: platform,
                     downloadUrl: data.url,
@@ -1427,10 +1396,20 @@
                     timestamp: new Date().toISOString()
                 };
             } catch (error) {
+                // Better placeholder for failed API calls
+                const placeholderThumbnail = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="640" height="360" fill="#1A1F28"/>
+                        <circle cx="320" cy="160" r="40" stroke="#00BCD4" stroke-width="4" fill="none"/>
+                        <path d="M310 150 L310 170 L330 160 Z" fill="#00BCD4"/>
+                        <text x="320" y="220" font-family="Arial" font-size="20" fill="#8B95A1" text-anchor="middle">${platform} Video</text>
+                    </svg>
+                `)}`;
+                
                 return {
                     title: `Video from ${platform}`,
                     duration: 'Unknown',
-                    thumbnail: 'https://via.placeholder.com/640x360/0F1419/00BCD4?text=Video',
+                    thumbnail: placeholderThumbnail,
                     size: 'Unknown',
                     platform: platform,
                     downloadUrl: null,
@@ -1549,7 +1528,18 @@
 
         function displayVideoInfo(info) {
             currentVideoData = info;
-            document.getElementById('thumbnail').src = info.thumbnail;
+            
+            const thumbnailElement = document.getElementById('thumbnail');
+            
+            // Set thumbnail with error handling
+            thumbnailElement.onerror = function() {
+                // If thumbnail fails to load, use placeholder
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgdmlld0JveD0iMCAwIDY0MCAzNjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2NDAiIGhlaWdodD0iMzYwIiBmaWxsPSIjMUExRjI4Ii8+CjxwYXRoIGQ9Ik0zMjAgMTgwTDI4MCAxNDBWMjIwTDMyMCAxODBaTTMyMCAxODBMMzYwIDE0MFYyMjBMMzIwIDE4MFoiIGZpbGw9IiMwMEJDRDQiLz4KPHRleHQgeD0iMzIwIiB5PSIyNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzhCOTVBMSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VmlkZW88L3RleHQ+Cjwvc3ZnPg==';
+                this.onerror = null; // Prevent infinite loop
+            };
+            
+            thumbnailElement.src = info.thumbnail;
+            
             document.getElementById('videoTitle').textContent = info.title;
             document.getElementById('videoDuration').textContent = `Duration: ${info.duration}`;
             document.getElementById('videoSize').textContent = `Platform: ${info.platform}`;
@@ -1587,7 +1577,7 @@
 
             historyList.innerHTML = downloadHistory.map((item, index) => `
                 <div class="history-item" style="animation-delay: ${index * 0.05}s">
-                    <img src="${item.thumbnail}" class="history-thumb" alt="Thumbnail">
+                    <img src="${item.thumbnail}" class="history-thumb" alt="Thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjY4IiB2aWV3Qm94PSIwIDAgMTIwIDY4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjY4IiBmaWxsPSIjMUExRjI4Ii8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iMjgiIHI9IjEyIiBzdHJva2U9IiMwMEJDRDQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8cGF0aCBkPSJNNTUgMjMgTDU1IDMzIEw2NSAyOCBaIiBmaWxsPSIjMDBCQ0Q0Ii8+Cjx0ZXh0IHg9IjYwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiM4Qjk1QTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlZpZGVvPC90ZXh0Pgo8L3N2Zz4='; this.onerror=null;">
                     <div class="history-info">
                         <div class="history-title">${item.title}</div>
                         <div class="history-meta">${item.platform} • ${formatDate(item.downloadedAt)}</div>
