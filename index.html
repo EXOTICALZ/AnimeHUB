@@ -1212,9 +1212,9 @@
                 // 1. Try YOUR Cloudflare Worker (yt-dlp backend)
                 // IMPORTANT: Replace 'YOUR-WORKER-URL' with your actual worker URL
                 // Example: https://video-downloader.your-username.workers.dev
-                const WORKER_URL = 'YOUR-WORKER-URL'; // ⚠️ CHANGE THIS!
+                const WORKER_URL = 'https://ytdlp.riconuelman.workers.dev/'; // ⚠️ CHANGE THIS!
                 
-                if (WORKER_URL !== 'YOUR-WORKER-URL') {
+                if (WORKER_URL !== 'https://ytdlp.riconuelman.workers.dev/') {
                     downloadUrl = await tryCloudflareWorker(url, WORKER_URL);
                 }
 
